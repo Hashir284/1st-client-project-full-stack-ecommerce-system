@@ -1,23 +1,24 @@
 {
-  "name": "1st-client-project-ecommerce-adminpanel",
+  "name": "eccommerce-backend",
   "version": "1.0.0",
   "description": "Full-stack e-commerce website with a responsive frontend and admin dashboard for managing products, orders, and store operations.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Hashir284/1st-client-project-ecommerce-adminpanel.git"
-  },
-  "keywords": [ "ecommerce", "admin-panel", "nextjs", "react", "typescript", "full-stack", "client-project" ],
+  "keywords": [
+    "ecommerce",
+    "admin-panel",
+    "nextjs",
+    "react",
+    "typescript",
+    "full-stack",
+    "client-project"
+  ],
   "author": "Hashir",
   "license": "ISC",
   "type": "module",
-  "bugs": {
-    "url": "https://github.com/Hashir284/1st-client-project-ecommerce-adminpanel/issues"
-  },
-  "homepage": "https://github.com/Hashir284/1st-client-project-ecommerce-adminpanel#readme",
   "dependencies": {
     "express": "^5.2.1"
   }
