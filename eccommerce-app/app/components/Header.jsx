@@ -57,7 +57,7 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
             <div className="flex items-center gap-1.5 sm:gap-3 min-w-0 shrink">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-1.5 sm:p-2 rounded-xl text-base sm:text-lg text-amber-400 hover:bg-white/10 active:scale-95 transition-all shrink-0"
+                className="lg:hidden p-1.5 sm:p-2 rounded-xl text-[18px] sm:text-lg text-amber-400 hover:bg-white/10 active:scale-95 transition-all shrink-0"
                 aria-label="Toggle Navigation"
               >
                 <FontAwesomeIcon icon={isMobileMenuOpen ? faXmark : faBars} />
@@ -65,9 +65,9 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
 
               <Link 
                 href="/" 
-                className="text-sm sm:text-xl md:text-2xl font-black tracking-tight sm:tracking-widest flex items-center gap-1 sm:gap-2 truncate"
+                className="text-[16px] sm:text-xl md:text-2xl font-black tracking-tight sm:tracking-widest flex items-center gap-1.5 sm:gap-2 truncate"
               >
-                <FontAwesomeIcon icon={faGem} className="text-amber-400 text-xs sm:text-base md:text-xl shrink-0" />
+                <FontAwesomeIcon icon={faGem} className="text-amber-400 text-[14px] sm:text-base md:text-xl shrink-0" />
                 <span className="truncate">NOIR<span className="text-amber-400">&</span>GOLD</span>
               </Link>
             </div>
@@ -90,7 +90,7 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
               {/* Search Toggle */}
               <button 
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="p-1.5 sm:p-2 rounded-xl text-xs sm:text-sm text-neutral-300 hover:text-amber-400 hover:bg-white/5 transition-all"
+                className="p-1.5 sm:p-2 rounded-xl text-[16px] sm:text-sm text-neutral-300 hover:text-amber-400 hover:bg-white/5 transition-all"
                 aria-label="Search"
               >
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -138,18 +138,18 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
 
           {/* SEARCH OVERLAY */}
           {isSearchOpen && (
-            <div className="p-2 sm:p-4 border-t border-amber-500/20 bg-black/90 rounded-b-2xl sm:rounded-b-3xl">
-              <div className="max-w-2xl mx-auto flex items-center gap-2 sm:gap-3">
-                <FontAwesomeIcon icon={faMagnifyingGlass} className="text-amber-400 text-xs sm:text-sm shrink-0" />
+            <div className="p-2.5 sm:p-4 border-t border-amber-500/20 bg-black/90 rounded-b-2xl sm:rounded-b-3xl">
+              <div className="max-w-2xl mx-auto flex items-center gap-2.5 sm:gap-3">
+                <FontAwesomeIcon icon={faMagnifyingGlass} className="text-amber-400 text-[16px] sm:text-sm shrink-0" />
                 <input 
                   type="text" 
                   placeholder="Search products..." 
-                  className="w-full bg-transparent text-xs sm:text-sm text-white focus:outline-none placeholder:text-neutral-500"
+                  className="w-full bg-transparent text-[14px] sm:text-sm text-white focus:outline-none placeholder:text-neutral-500"
                   autoFocus
                 />
                 <button 
                   onClick={() => setIsSearchOpen(false)}
-                  className="text-[10px] font-extrabold px-2 py-0.5 sm:py-1 rounded bg-white/10 text-neutral-300 shrink-0"
+                  className="text-[11px] font-extrabold px-2 py-0.5 sm:py-1 rounded bg-white/10 text-neutral-300 shrink-0"
                 >
                   ESC
                 </button>
@@ -169,14 +169,14 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
               <Link 
                 href="/" 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-base font-black tracking-wider flex items-center gap-2 text-white"
+                className="text-[18px] font-black tracking-wider flex items-center gap-2 text-white"
               >
-                <FontAwesomeIcon icon={faGem} className="text-amber-400" />
+                <FontAwesomeIcon icon={faGem} className="text-amber-400 text-[16px]" />
                 <span>NOIR<span className="text-amber-400">&</span>GOLD</span>
               </Link>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-amber-400 p-2 text-lg"
+                className="text-amber-400 p-2 text-[20px]"
               >
                 <FontAwesomeIcon icon={faXmark} />
               </button>
@@ -188,9 +188,9 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
                   key={index}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3.5 text-white text-sm font-bold hover:text-amber-400 transition-colors py-1"
+                  className="flex items-center gap-3.5 text-white text-[16px] font-bold hover:text-amber-400 transition-colors py-1"
                 >
-                  <FontAwesomeIcon icon={link.icon} className="text-amber-400 text-base w-5 shrink-0" />
+                  <FontAwesomeIcon icon={link.icon} className="text-amber-400 text-[18px] w-5 shrink-0" />
                   <span>{link.name}</span>
                 </Link>
               ))}
@@ -203,33 +203,33 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
       <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-neutral-950/95 backdrop-blur-md border-t border-amber-500/20 py-2 px-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))]">
         <div className="flex items-center justify-around text-neutral-400 max-w-md mx-auto">
           <Link href="/products" className="flex flex-col items-center gap-0.5 hover:text-amber-400 transition-colors p-1">
-            <FontAwesomeIcon icon={faStore} className="text-sm sm:text-base" />
-            <span className="text-[9px] sm:text-[10px] font-bold tracking-tight">Shop</span>
+            <FontAwesomeIcon icon={faStore} className="text-[18px] sm:text-base" />
+            <span className="text-[11px] sm:text-[10px] font-bold tracking-tight">Shop</span>
           </Link>
 
           <Link href="/wishlist" className="relative flex flex-col items-center gap-0.5 hover:text-amber-400 transition-colors p-1">
-            <FontAwesomeIcon icon={faHeart} className="text-sm sm:text-base" />
+            <FontAwesomeIcon icon={faHeart} className="text-[18px] sm:text-base" />
             {wishlistCount > 0 && (
-              <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/3 w-3.5 h-3.5 rounded-full bg-rose-600 text-white font-black text-[8px] flex items-center justify-center">
+              <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/3 w-4 h-4 rounded-full bg-rose-600 text-white font-black text-[9px] flex items-center justify-center">
                 {wishlistCount}
               </span>
             )}
-            <span className="text-[9px] sm:text-[10px] font-bold tracking-tight">Wishlist</span>
+            <span className="text-[11px] sm:text-[10px] font-bold tracking-tight">Wishlist</span>
           </Link>
 
           <Link href="/cart" className="relative flex flex-col items-center gap-0.5 hover:text-amber-400 transition-colors p-1">
-            <FontAwesomeIcon icon={faCartShopping} className="text-sm sm:text-base" />
+            <FontAwesomeIcon icon={faCartShopping} className="text-[18px] sm:text-base" />
             {cartCount > 0 && (
-              <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/3 w-3.5 h-3.5 rounded-full bg-amber-400 text-black font-black text-[8px] flex items-center justify-center">
+              <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/3 w-4 h-4 rounded-full bg-amber-400 text-black font-black text-[9px] flex items-center justify-center">
                 {cartCount}
               </span>
             )}
-            <span className="text-[9px] sm:text-[10px] font-bold tracking-tight">Cart</span>
+            <span className="text-[11px] sm:text-[10px] font-bold tracking-tight">Cart</span>
           </Link>
 
           <Link href="/login" className="flex flex-col items-center gap-0.5 hover:text-amber-400 transition-colors p-1">
-            <FontAwesomeIcon icon={faUser} className="text-sm sm:text-base" />
-            <span className="text-[9px] sm:text-[10px] font-bold tracking-tight">Account</span>
+            <FontAwesomeIcon icon={faUser} className="text-[18px] sm:text-base" />
+            <span className="text-[11px] sm:text-[10px] font-bold tracking-tight">Account</span>
           </Link>
         </div>
       </div>
