@@ -1,4 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { config } from '@fortawesome/fontawesome-svg-core'; 
+import '@fortawesome/fontawesome-svg-core/styles.css';
+config.autoAddCss = false; // Auto CSS injection stop karein
 import { 
   faMagnifyingGlass, 
   faHeart, 
