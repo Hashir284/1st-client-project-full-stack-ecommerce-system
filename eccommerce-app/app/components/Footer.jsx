@@ -7,7 +7,7 @@ import {
   faShieldHalved, 
   faTruckFast, 
   faRotateLeft 
-} from '../../icons';
+} from '../icons';
 
 export default function Footer() {
   return (
