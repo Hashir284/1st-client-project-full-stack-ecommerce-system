@@ -2,7 +2,7 @@
 
 /* @layer base { */
   /* ================= LIGHT MODE ================= */
- :light {
+ .light {
   /* Base Colors */
   --black: #121212;
   --golden: #D4AF37;
@@ -19,7 +19,7 @@
   --text-secondary: #4B5563;
   --text-on-dark: #FFFFFF;
 
-  --accent-gold: #D4AF37;
+  --accent-gold: #F59E0B;
   --accent-gold-hover: #AA8B22;
   --brand-red: #E11D48;
   --border-color: #E5E7EB;
@@ -35,7 +35,7 @@
   --text-secondary: #9CA3AF;
   --text-on-dark: #FFFFFF;
 
-  --accent-gold: #E5C158;
+  --accent-gold: #F59E0B;
   --accent-gold-hover: #D4AF37;
   --brand-red: #F43F5E;
   --border-color: #2E2E2E;
