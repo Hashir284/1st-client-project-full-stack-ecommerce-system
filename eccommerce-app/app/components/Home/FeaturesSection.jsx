@@ -67,12 +67,10 @@ export default function WomenMenCoupleNewArrivalSection() {
 
   const filtered = SHOWCASE_PRODUCTS.filter((p) => p.category === activeFilter);
 
-  // Check karo ke content actually overflow ho raha hai ya nahi
   const checkOverflow = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
-    // Chota buffer (2px) taake sub-pixel rounding false-positive na de
-    setCanScroll(el.scrollWidth > el.clientWidth + 2);
+    setCanScroll(el.scrollWidth > el.clientWidth + 4);
   }, []);
 
   useEffect(() => {
@@ -80,7 +78,6 @@ export default function WomenMenCoupleNewArrivalSection() {
       trackRef.current.scrollTo({ left: 0, behavior: 'auto' });
     }
     setActiveIndex(0);
-    // Filter change ke baad DOM update hone do, phir overflow check karo
     const id = requestAnimationFrame(checkOverflow);
     return () => cancelAnimationFrame(id);
   }, [activeFilter, checkOverflow]);
@@ -91,56 +88,74 @@ export default function WomenMenCoupleNewArrivalSection() {
   }, [checkOverflow]);
 
   const updateActiveDot = () => {
-  const el = trackRef.current;
-  if (!el || !el.children.length) return;
-  const maxScrollLeft = el.scrollWidth - el.clientWidth;
-  // Agar scroll possible hi nahi (sab cards fit ho rahe hain)
-  if (maxScrollLeft <= 0) {
-    setActiveIndex(0);
-    return;
-  }
-  // Scroll position ko proportion se map karo (0 to length-1)
-  const scrollRatio = el.scrollLeft / maxScrollLeft;
-  const idx = Math.round(scrollRatio * (filtered.length - 1));
-  setActiveIndex(Math.min(Math.max(idx, 0), filtered.length - 1));
-};
+    const el = trackRef.current;
+    if (!el || !el.children.length) return;
+
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) {
+      setActiveIndex(0);
+      return;
+    }
+
+    // Nearest visible card ka index check karein
+    const scrollLeft = el.scrollLeft;
+    const cardWidth = el.children[0].offsetWidth;
+    const gap = 16; // Mobile gap (gap-4 = 16px)
+    const index = Math.round(scrollLeft / (cardWidth + gap));
+    
+    setActiveIndex(Math.min(Math.max(index, 0), filtered.length - 1));
+  };
 
   const scrollByAmount = (dir) => {
     const el = trackRef.current;
     if (!el || !el.children.length) return;
-    const cardWidth = el.children[0].offsetWidth + 24;
-    el.scrollBy({ left: dir * cardWidth * 2, behavior: 'smooth' });
+    const cardWidth = el.children[0].offsetWidth + 16;
+    el.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
   };
 
   const goToIndex = (idx) => {
     const el = trackRef.current;
     if (!el || !el.children[idx]) return;
-    el.scrollTo({ left: el.children[idx].offsetLeft - 24, behavior: 'smooth' });
+    const targetCard = el.children[idx];
+    el.scrollTo({
+      left: targetCard.offsetLeft - el.offsetLeft,
+      behavior: 'smooth',
+    });
   };
 
   return (
     <section
-      className="py-20 relative overflow-hidden"
-      style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', borderBottom: '1px solid var(--border-color)' }}
+      className="py-12 sm:py-20 relative overflow-hidden"
+      style={{
+        backgroundColor: 'var(--bg-primary)',
+        color: 'var(--text-primary)',
+        borderBottom: '1px solid var(--border-color)',
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* SECTION HEADER */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs uppercase font-extrabold tracking-[0.25em] block mb-2" style={{ color: 'var(--accent-gold)' }}>
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <span
+            className="text-[10px] sm:text-xs uppercase font-extrabold tracking-[0.2em] sm:tracking-[0.25em] block mb-2"
+            style={{ color: 'var(--accent-gold)' }}
+          >
             SHOP BY WHO IT'S FOR
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-black tracking-tight">
             Find Their <span style={{ color: 'var(--accent-gold)' }}>Perfect Fit</span>
           </h2>
         </div>
 
         {/* FILTER TABS */}
-        <div className="flex items-center justify-center gap-2 sm:gap-4 overflow-x-auto pb-2 mb-10 scrollbar-hide" style={{ scrollbarWidth: 'none' }}>
+        <div
+          className="flex items-center justify-start sm:justify-center gap-2 sm:gap-4 overflow-x-auto pb-3 mb-6 sm:mb-10 scrollbar-hide"
+          style={{ scrollbarWidth: 'none' }}
+        >
           {FILTERS.map((f) => (
             <button
               key={f.key}
               onClick={() => setActiveFilter(f.key)}
-              className="shrink-0 px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300"
+              className="shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-black uppercase tracking-wider transition-all duration-300"
               style={{
                 backgroundColor: activeFilter === f.key ? 'var(--accent-gold)' : 'transparent',
                 color: activeFilter === f.key ? 'var(--black)' : 'var(--text-secondary)',
@@ -153,15 +168,20 @@ export default function WomenMenCoupleNewArrivalSection() {
         </div>
 
         {/* CAROUSEL */}
-        <div className="relative">
-          {/* Arrows sirf tab dikhenge jab content overflow ho raha ho (canScroll === true) */}
+        <div className="relative group">
+          {/* Desktop/Tablet Navigation Arrows */}
           {canScroll && (
             <>
               <button
                 onClick={() => scrollByAmount(-1)}
                 aria-label="Scroll left"
-                className="absolute left-1 sm:-left-5 top-24 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center shadow-xl active:scale-90 transition-transform"
-                style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--accent-gold)', color: 'var(--accent-gold)', opacity: 0.95 }}
+                className="hidden md:flex absolute -left-4 lg:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full items-center justify-center shadow-xl active:scale-90 transition-transform"
+                style={{
+                  backgroundColor: 'var(--bg-secondary)',
+                  border: '1px solid var(--accent-gold)',
+                  color: 'var(--accent-gold)',
+                  opacity: 0.95,
+                }}
               >
                 <FontAwesomeIcon icon={faChevronLeft} className="text-sm" />
               </button>
@@ -169,8 +189,13 @@ export default function WomenMenCoupleNewArrivalSection() {
               <button
                 onClick={() => scrollByAmount(1)}
                 aria-label="Scroll right"
-                className="absolute right-1 sm:-right-5 top-24 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center shadow-xl active:scale-90 transition-transform"
-                style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--accent-gold)', color: 'var(--accent-gold)', opacity: 0.95 }}
+                className="hidden md:flex absolute -right-4 lg:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full items-center justify-center shadow-xl active:scale-90 transition-transform"
+                style={{
+                  backgroundColor: 'var(--bg-secondary)',
+                  border: '1px solid var(--accent-gold)',
+                  color: 'var(--accent-gold)',
+                  opacity: 0.95,
+                }}
               >
                 <FontAwesomeIcon icon={faChevronRight} className="text-sm" />
               </button>
@@ -185,16 +210,21 @@ export default function WomenMenCoupleNewArrivalSection() {
             <div
               ref={trackRef}
               onScroll={updateActiveDot}
-              className={`flex gap-6 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide ${!canScroll ? 'justify-center sm:justify-start' : ''}`}
+              className={`flex gap-4 sm:gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide ${
+                !canScroll ? 'justify-center sm:justify-start' : ''
+              }`}
               style={{ scrollbarWidth: 'none' }}
             >
               {filtered.map((product) => (
                 <div
                   key={product.id}
-                  className="snap-start shrink-0 w-[46%] sm:w-[32%] lg:w-[calc(25%-1.125rem)] rounded-2xl overflow-hidden flex flex-col"
-                  style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}
+                  className="snap-start shrink-0 w-[72%] xs:w-[60%] sm:w-[45%] md:w-[32%] lg:w-[calc(25%-1.125rem)] rounded-2xl overflow-hidden flex flex-col"
+                  style={{
+                    backgroundColor: 'var(--bg-secondary)',
+                    border: '1px solid var(--border-color)',
+                  }}
                 >
-                  <div className="relative h-48 w-full overflow-hidden bg-white/5">
+                  <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-white/5">
                     <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
                     <button
                       className="absolute top-2.5 right-2.5 w-7 h-7 rounded-full flex items-center justify-center backdrop-blur-md"
@@ -237,17 +267,17 @@ export default function WomenMenCoupleNewArrivalSection() {
           )}
         </div>
 
-        {/* PAGINATION DOTS — sirf tab jab scroll possible ho */}
+        {/* PAGINATION DOTS */}
         {canScroll && filtered.length > 0 && (
-          <div className="flex items-center justify-center gap-2 mt-8 flex-wrap">
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-8 flex-wrap">
             {filtered.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => goToIndex(idx)}
                 aria-label={`Go to item ${idx + 1}`}
-                className="h-2.5 rounded-full transition-all duration-300"
+                className="h-2 rounded-full transition-all duration-300"
                 style={{
-                  width: activeIndex === idx ? '1.75rem' : '0.625rem',
+                  width: activeIndex === idx ? '1.5rem' : '0.5rem',
                   backgroundColor: activeIndex === idx ? 'var(--accent-gold)' : 'var(--border-color)',
                 }}
               />

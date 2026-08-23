@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   FontAwesomeIcon, 
@@ -20,6 +20,19 @@ import { useApp } from '../Context/context';
 export default function Header({ cartCount = 3, wishlistCount = 5 }) {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useApp();
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  // Close search bar on ESC key press
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsSearchOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const mobileNavLinks = [
     { name: 'Home', href: '/', icon: faHouse },
@@ -55,7 +68,7 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
 
       {/* DESKTOP HEADER */}
       <div className="hidden lg:block sticky top-0 z-30 px-8 py-3">
-        <header className="mx-auto rounded-3xl backdrop-blur-2xl transition-all duration-300 shadow-md bg-[var(--bg-secondary)]/85 border border-[var(--border-color)] text-[var(--text-primary)]">
+        <header className="mx-auto rounded-3xl backdrop-blur-2xl transition-all duration-300 shadow-md bg-[var(--bg-secondary)]/85 border border-[var(--border-color)] text-[var(--text-primary)] relative overflow-hidden">
           <div className="px-8 h-20 flex items-center justify-between gap-4">
             <Link href="/" className="text-2xl font-black tracking-widest flex items-center gap-2 truncate">
               <FontAwesomeIcon icon={faGem} className="text-[var(--accent-gold)] w-5 h-5 shrink-0" />
@@ -71,6 +84,19 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
             </nav>
 
             <div className="flex items-center gap-2 shrink-0">
+              {/* SEARCH TRIGGER BUTTON */}
+              <button
+                onClick={() => setIsSearchOpen((prev) => !prev)}
+                className={`p-2 rounded-xl transition-all ${
+                  isSearchOpen 
+                    ? 'text-[var(--accent-gold)] bg-white/10' 
+                    : 'text-[var(--text-secondary)] hover:text-[var(--accent-gold)] hover:bg-white/5'
+                }`}
+                aria-label="Toggle Search Bar"
+              >
+                <FontAwesomeIcon icon={isSearchOpen ? faXmark : faMagnifyingGlass} className="w-4 h-4" />
+              </button>
+
               <Link href="/wishlist" className="relative p-2 rounded-xl text-[var(--text-secondary)] hover:text-[var(--accent-gold)] hover:bg-white/5 transition-all">
                 <FontAwesomeIcon icon={faHeart} className="w-4 h-4" />
                 {wishlistCount > 0 && (
@@ -93,6 +119,37 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
                 <FontAwesomeIcon icon={faUser} className="w-3.5 h-3.5" />
                 <span>Sign in</span>
               </Link>
+            </div>
+          </div>
+
+          {/* DROPDOWN SEARCH BAR WITH ESC BUTTON */}
+          <div
+            className={`transition-all duration-300 ease-in-out border-t border-[var(--border-color)] bg-[var(--bg-accent)] ${
+              isSearchOpen ? 'max-h-20 opacity-100 py-3 px-8' : 'max-h-0 opacity-0 py-0 px-8 overflow-hidden'
+            }`}
+          >
+            <div className="relative max-w-2xl mx-auto flex items-center">
+              <input
+                type="text"
+                placeholder="Search watches, accessories..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus={isSearchOpen}
+                className="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl pl-11 pr-16 py-2.5 text-xs text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-gold)] placeholder:text-[var(--text-secondary)] shadow-inner"
+              />
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="absolute left-4 text-[var(--text-secondary)] w-3.5 h-3.5 pointer-events-none"
+              />
+              
+              {/* ESC BUTTON INSIDE SEARCH BAR */}
+              <button
+                onClick={() => setIsSearchOpen(false)}
+                className="absolute right-2.5 px-2 py-0.5 rounded-md bg-[var(--bg-primary)] border border-[var(--border-color)] text-[10px] font-bold text-[var(--text-secondary)] hover:text-[var(--accent-gold)] hover:border-[var(--accent-gold)] transition-all active:scale-95"
+                title="Close (Esc)"
+              >
+                ESC
+              </button>
             </div>
           </div>
         </header>
