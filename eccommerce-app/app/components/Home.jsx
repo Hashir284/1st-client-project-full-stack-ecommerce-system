@@ -82,7 +82,7 @@ export default function Home() {
       
       {/* 1. HERO SECTION */}
       <section 
-        className="relative py-14 lg:py-22 overflow-hidden"
+        className="relative pt-22 py-14 lg:py-22 overflow-hidden"
         style={{ 
           backgroundColor: 'var(--bg-secondary)', 
           borderBottom: '1px solid var(--border-color)' 
