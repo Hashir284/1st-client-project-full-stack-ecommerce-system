@@ -2,7 +2,7 @@
 
 /* @layer base { */
   /* ================= LIGHT MODE ================= */
- :root {
+ :light {
   /* Base Colors */
   --black: #121212;
   --golden: #D4AF37;
@@ -26,7 +26,7 @@
 }
 
 /* ================= DARK MODE ================= */
-.dark {
+:root {
   --bg-primary: #121212;
   --bg-secondary: #1E1E1E;
   --bg-accent: #08080A; /* Deeper Premium Black */
@@ -47,4 +47,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+button{
+  white-space: nowrap;
 }

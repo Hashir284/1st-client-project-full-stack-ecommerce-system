@@ -7,7 +7,6 @@ import {
   faSun,
   faMoon,
   faChevronDown,
-  faPhone,
   faEnvelope,
   faLocationDot,
   faShieldHalved,
@@ -21,7 +20,13 @@ import {
   faGem,
   faTag,
   faBars,
-  faXmark
+  faXmark,
+  faHouse,
+  faStore,
+  faLayerGroup,
+  faCircleInfo,
+  faPhone,
+  faHeadset
 } from '@fortawesome/free-solid-svg-icons';
 
 export {
@@ -33,7 +38,6 @@ export {
   faSun,
   faMoon,
   faChevronDown,
-  faPhone,
   faEnvelope,
   faLocationDot,
   faShieldHalved,
@@ -47,5 +51,11 @@ export {
   faGem,
   faTag,
   faBars,
-  faXmark
+  faXmark,
+  faHouse,
+  faStore,
+  faLayerGroup,
+  faCircleInfo,
+  faPhone,
+  faHeadset
 };
