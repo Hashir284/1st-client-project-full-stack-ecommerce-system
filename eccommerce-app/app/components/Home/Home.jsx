@@ -17,10 +17,11 @@ import {
   faShieldHalved,
   faRotateLeft,
   faEnvelope
-} from '../icons'; // Adjust path if needed
-import { useApp } from '../Context/context';
+} from '../../icons'; // Adjust path if needed
+import { useApp } from '../../Context/context';
 import Footer from './Footer';
 import Header from './Header';
+import CategorySliderSection from './CategorySliderSection';
 
 const BRAND_FEATURES = [
   { icon: faTruckFast, title: 'Express Worldwide Shipping', desc: 'Complimentary insured shipping on orders over $200' },
@@ -187,8 +188,10 @@ export default function Home() {
           </div>
         </section>
 
+        <CategorySliderSection />
+
         {/* BRAND VALUE PROPOSITIONS */}
-        <section className="py-12" style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--bg-primary)' }}>
+        {/* <section className="py-12" style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--bg-primary)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {BRAND_FEATURES.map((item, idx) => (
@@ -208,10 +211,10 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* CRAFTSMANSHIP HIGHLIGHT */}
-        <section className="py-16" style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)' }}>
+        {/* <section className="py-16" style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <span className="text-xs uppercase font-extrabold tracking-widest" style={{ color: 'var(--accent-gold)' }}>Horological Artistry</span>
@@ -235,10 +238,10 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* FLASH DEAL SECTION */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div
             className="rounded-3xl p-8 lg:p-12 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-10 shadow-2xl"
             style={{ backgroundColor: 'var(--bg-secondary)', border: '2px solid var(--accent-gold)' }}
@@ -297,10 +300,10 @@ export default function Home() {
               />
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* CURATED CATEGORIES */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex justify-between items-end mb-10">
             <div>
               <h2 className="text-2xl sm:text-3xl font-black">Watch Collections</h2>
@@ -332,10 +335,10 @@ export default function Home() {
               </Link>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* FEATURED CATALOG GRID */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
             <div>
               <h2 className="text-2xl sm:text-3xl font-black">Signature Timepieces</h2>
@@ -424,10 +427,10 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* LOOKBOOK INTERACTIVE SHOWCASE */}
-        <section className="py-20" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
+        {/* <section className="py-20" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <span className="text-xs uppercase font-extrabold tracking-widest" style={{ color: 'var(--accent-gold)' }}>Style Guide</span>
@@ -479,10 +482,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* COMMUNITY GALLERY */}
-        <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FontAwesomeIcon icon={faCrown} className="text-3xl mb-2" style={{ color: 'var(--accent-gold)' }} />
           <h2 className="text-2xl font-black">#NoirAndGoldWrist</h2>
           <p className="text-xs mb-8" style={{ color: 'var(--text-secondary)' }}>Share your timepiece setups to be featured in our global horology gallery.</p>
@@ -493,10 +496,10 @@ export default function Home() {
             <img src="https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=400&q=80" alt="Wrist shot 3" className="rounded-2xl h-48 w-full object-cover hover:scale-105 transition-all duration-300" />
             <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80" alt="Wrist shot 4" className="rounded-2xl h-48 w-full object-cover hover:scale-105 transition-all duration-300" />
           </div>
-        </section>
+        </section> */}
 
         {/* REVIEWS & TESTIMONIALS */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center max-w-xl mx-auto mb-12">
             <h2 className="text-2xl sm:text-4xl font-black">Collector Feedback</h2>
             <p className="text-xs sm:text-sm mt-2" style={{ color: 'var(--text-secondary)' }}>
@@ -529,10 +532,10 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* VIP NEWSLETTER BANNER */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        {/* <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
           <div
             className="rounded-3xl p-8 sm:p-14 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden"
             style={{
@@ -582,9 +585,9 @@ export default function Home() {
               </button>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
-      <Footer />
+      <Footer variant='minimal'/>
     </div>
   );
 }

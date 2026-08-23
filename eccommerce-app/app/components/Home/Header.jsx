@@ -14,8 +14,8 @@ import {
   faStore,
   faCircleInfo,
   faPhone
-} from '../icons';
-import { useApp } from '../Context/context';
+} from '../../icons';
+import { useApp } from '../../Context/context';
 
 export default function Header({ cartCount = 3, wishlistCount = 5 }) {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useApp();
