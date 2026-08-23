@@ -407,7 +407,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex justify-center gap-2 sm:gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-8">
             {LOOKBOOKS.map((lb, index) => (
               <button
                 key={index}
