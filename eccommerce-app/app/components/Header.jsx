@@ -15,12 +15,13 @@ import {
   faCircleInfo,
   faPhone
 } from '../icons';
+import { useApp } from '../Context/context'; // Custom hook import kia yahan
 
 export default function Header({ cartCount = 3, wishlistCount = 5 }) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // Directly call useApp()
+  const { isMobileMenuOpen, setIsMobileMenuOpen } = useApp();
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Aapki e-commerce nav links list
   const mobileNavLinks = [
     { name: 'Home', href: '/', icon: faHouse },
     { name: 'Shop', href: '/products', icon: faStore },
@@ -40,7 +41,7 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
 
   return (
     <>
-      {/* MOBILE TRIGGER BUTTON (Absolute Positioned) */}
+      {/* MOBILE TRIGGER BUTTON */}
       <div className="lg:hidden fixed top-4 left-4 z-30">
         <button
           onClick={() => setIsMobileMenuOpen(true)}
@@ -98,21 +99,18 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
         </header>
       </div>
 
-      {/* MOBILE SIDEBAR DRAWER WITH 0.3s SLIDE ANIMATION */}
-      <div className={`fixed inset-0 z-50 lg:hidden transition-opacsity duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        {/* Backdrop overlay */}
+      {/* MOBILE SIDEBAR DRAWER */}
+      <div className={`fixed inset-0 z-50 lg:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div 
           onClick={() => setIsMobileMenuOpen(false)}
           className="absolute inset-0 bg-black/80 backdrop-blur-sm"
         />
 
-        {/* Sliding Sidebar Panel (0.3s Ease Animation) */}
         <aside 
-          className={`relative w-[75%] max-w-[290px] min-h-full bg-[var(--bg-accent,#08080A)] text-[var(--text-primary,#FFFFFF)] pt-8 pb-6 px-6 flex flex-col justify-between shadow-2xl transition-transform duration-350 ease-in-out ${
+          className={`relative w-[75%] max-w-[290px] min-h-full bg-[var(--bg-accent,#08080A)] text-[var(--text-primary,#FFFFFF)] pt-8 pb-6 px-6 flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-in-out ${
             isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
-          {/* External Floating Close (X) Button - Exactly like Image Reference */}
           <button
             onClick={() => setIsMobileMenuOpen(false)}
             className="absolute top-4 -right-14 w-10 h-10 bg-[var(--bg-secondary,#1E1E1E)] border border-[var(--border-color,#2E2E2E)] rounded-xl flex items-center justify-center text-[var(--text-secondary,#9CA3AF)] hover:text-white shadow-xl active:scale-90 transition-transform"
@@ -122,7 +120,6 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
           </button>
 
           <div className="space-y-6">
-            {/* Logo Section */}
             <div className="flex flex-col items-center justify-center pt-2 pb-2">
               <Link 
                 href="/" 
@@ -134,7 +131,6 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
               </Link>
             </div>
 
-            {/* Search Input */}
             <div className="relative my-2">
               <input 
                 type="text"
@@ -149,7 +145,6 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
               />
             </div>
 
-            {/* Navigation Item List (With Border Dividers as in reference image) */}
             <nav className="flex flex-col">
               {mobileNavLinks.map((link, index) => (
                 <Link
@@ -176,7 +171,6 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
             </nav>
           </div>
 
-          {/* Drawer Footer */}
           <div className="pt-4 border-t border-[var(--border-color,#2E2E2E)] text-[11px] text-[var(--text-secondary,#9CA3AF)] text-center">
             © NOIR & GOLD
           </div>

@@ -18,6 +18,7 @@ import {
   faRotateLeft,
   faEnvelope
 } from '../icons'; // Adjust path if needed
+import { useApp } from '../Context/context';
 
 const BRAND_FEATURES = [
   { icon: faTruckFast, title: 'Express Worldwide Shipping', desc: 'Complimentary insured shipping on orders over $200' },
@@ -76,9 +77,10 @@ const CRAFTSMANSHIP_STEPS = [
 
 export default function Home() {
   const [activeLookbook, setActiveLookbook] = useState(0);
+    const { isMobileMenuOpen, setIsMobileMenuOpen } = useApp(); 
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }} className="transition-colors duration-300">
+    <div style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }} className={`transition-colors duration-300`}>
       
       {/* 1. HERO SECTION */}
       <section 
