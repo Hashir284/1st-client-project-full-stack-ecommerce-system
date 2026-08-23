@@ -83,22 +83,22 @@ export default function Home() {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useApp();
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Jab window 50px se zayada scroll ho -- no
-        setIsMobileMenuOpen(false);
-    };
-
-    // Scroll listener attach karein
-    window.addEventListener('scroll', handleScroll);
-
-    // Cleanup: Component unmount par listener remove hoga
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [])
+  if (isMobileMenuOpen) {
+    const scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+  } else {
+    const scrollY = document.body.style.top;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+  }
+}, [isMobileMenuOpen]);
 
   return (
-    <div className={`${isMobileMenuOpen ? '!overflow-y-hidden' : ''}`}>
+    <div className={''}>
       <Header />
       <div 
         onClick={() => isMobileMenuOpen && setIsMobileMenuOpen(false)} 
