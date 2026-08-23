@@ -18,25 +18,28 @@ import {
 } from '../icons';
 
 export default function Header({ cartCount = 3, wishlistCount = 5 }) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false)
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark');
-    setIsDarkMode(isDark);
-  }, []);
+useEffect(() => {
+  setIsDarkMode(
+    document.documentElement.classList.contains('dark')
+  )
+}, [])
 
-  const toggleTheme = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove('dark');
-      setIsDarkMode(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      setIsDarkMode(true);
-    }
-  };
+const toggleTheme = () => {
+  const newTheme = isDarkMode ? 'light' : 'dark'
+
+  document.documentElement.classList.toggle(
+    'dark',
+    newTheme === 'dark'
+  )
+
+  localStorage.setItem('theme', newTheme)
+  setIsDarkMode(newTheme === 'dark')
+}
 
   const categories = [
     { name: 'Timepieces', href: '/categories/watches', desc: 'Precision Swiss Movement' },
