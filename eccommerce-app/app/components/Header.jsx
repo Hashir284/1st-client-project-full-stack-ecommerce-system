@@ -99,7 +99,7 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
       </div>
 
       {/* MOBILE SIDEBAR DRAWER WITH 0.3s SLIDE ANIMATION */}
-      <div className={`fixed inset-0 z-50 lg:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+      <div className={`fixed inset-0 z-50 lg:hidden transition-opacsity duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         {/* Backdrop overlay */}
         <div 
           onClick={() => setIsMobileMenuOpen(false)}
@@ -108,7 +108,7 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
 
         {/* Sliding Sidebar Panel (0.3s Ease Animation) */}
         <aside 
-          className={`relative w-[75%] max-w-[290px] h-100vh bg-[var(--bg-accent,#08080A)] text-[var(--text-primary,#FFFFFF)] pt-8 pb-6 px-6 flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-in-out ${
+          className={`relative w-[75%] max-w-[290px] min-h-full bg-[var(--bg-accent,#08080A)] text-[var(--text-primary,#FFFFFF)] pt-8 pb-6 px-6 flex flex-col justify-between shadow-2xl transition-transform duration-350 ease-in-out ${
             isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
