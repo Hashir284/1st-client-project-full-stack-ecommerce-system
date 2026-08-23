@@ -77,10 +77,10 @@ const CRAFTSMANSHIP_STEPS = [
 
 export default function Home() {
   const [activeLookbook, setActiveLookbook] = useState(0);
-    const { isMobileMenuOpen, setIsMobileMenuOpen } = useApp(); 
+  const { isMobileMenuOpen, setIsMobileMenuOpen } = useApp(); 
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }} className={`transition-colors duration-300`}>
+    <div onClick={()=> isMobileMenuOpen && setIsMobileMenuOpen(false)} onScroll={()=> isMobileMenuOpen && setIsMobileMenuOpen(false)} style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }} className={`transition-colors duration-300`}>
       
       {/* 1. HERO SECTION */}
       <section 
