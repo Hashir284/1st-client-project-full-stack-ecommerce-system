@@ -98,7 +98,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div>
+    <div className={`${isMobileMenuOpen ? '!overflow-y-hidden' : ''}`}>
       <Header />
       <div 
         onClick={() => isMobileMenuOpen && setIsMobileMenuOpen(false)} 
