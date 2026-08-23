@@ -27,17 +27,48 @@
 
 /* ================= DARK MODE ================= */
 :root {
+  /* Base */
+  --mehrun: #3C0008;
   --bg-primary: #121212;
   --bg-secondary: #1E1E1E;
   --bg-accent: #08080A; /* Deeper Premium Black */
+  --black: #000000; /* was missing — used in buttons as var(--black) */
 
+  /* Text */
   --text-primary: #FFFFFF;
   --text-secondary: #9CA3AF;
   --text-on-dark: #FFFFFF;
+  --text-muted-gray: #D1D5DB;   /* tailwind gray-300, used in hero/gallery captions */
+  --text-neutral-300: #D4D4D4;  /* tailwind neutral-300, VIP banner desc text */
 
+  /* Gold family */
   --accent-gold: #F59E0B;
   --accent-gold-hover: #D4AF37;
+  --accent-gold-soft: rgba(212, 175, 55, 0.08);   /* hero badge bg */
+  --accent-gold-soft-2: rgba(212, 175, 55, 0.1);  /* brand feature icon bg */
+  --accent-amber-400: #FBBF24;   /* tailwind amber-400, icons + hero tag bg */
+  --accent-amber-500: #F59E0B;   /* tailwind amber-500, section eyebrow labels */
+  --accent-amber-300: #FCD34D;   /* tailwind amber-300, newsletter btn hover */
+  --accent-amber-soft-border: rgba(251, 191, 36, 0.2); /* amber-400/20 border */
+  --accent-amber-soft-bg: rgba(251, 191, 36, 0.1);     /* amber-400/10 bg */
+
+  /* Reds */
   --brand-red: #F43F5E;
+  --accent-rose-500: #F43F5E;    /* tailwind rose-500, wishlist hover */
+
+  /* Overlay blacks (gradients / scrims) */
+  --overlay-black-90: rgba(0, 0, 0, 0.9);
+  --overlay-black-40: rgba(0, 0, 0, 0.4);
+  --overlay-black-30: rgba(0, 0, 0, 0.3);
+  --overlay-black-20: rgba(0, 0, 0, 0.2);
+  --overlay-black-05: rgba(0, 0, 0, 0.05);
+
+  /* Neutrals (newsletter input) */
+  --neutral-900: #171717;  /* input bg */
+  --neutral-700: #404040;  /* input border */
+  --neutral-500: #737373;  /* placeholder text */
+
+  /* Borders */
   --border-color: #2E2E2E;
 }
 /* } */

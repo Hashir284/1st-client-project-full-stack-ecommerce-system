@@ -29,12 +29,16 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <div 
               className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 text-lg"
-              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--accent-gold)', border: '1px solid var(--border-color)' }}
+              style={{ 
+                backgroundColor: 'var(--bg-primary)', 
+                color: 'var(--accent-gold)', 
+                border: '1px solid var(--border-color)' 
+              }}
             >
               <FontAwesomeIcon icon={faTruckFast} />
             </div>
             <div>
-              <h5 className="font-bold text-sm">Express Global Delivery</h5>
+              <h5 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>Express Global Delivery</h5>
               <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>Complimentary shipping on orders above $200</p>
             </div>
           </div>
@@ -42,12 +46,16 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <div 
               className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 text-lg"
-              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--accent-gold)', border: '1px solid var(--border-color)' }}
+              style={{ 
+                backgroundColor: 'var(--bg-primary)', 
+                color: 'var(--accent-gold)', 
+                border: '1px solid var(--border-color)' 
+              }}
             >
               <FontAwesomeIcon icon={faShieldHalved} />
             </div>
             <div>
-              <h5 className="font-bold text-sm">Encrypted Payments</h5>
+              <h5 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>Encrypted Payments</h5>
               <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>100% verified secure checkouts</p>
             </div>
           </div>
@@ -55,12 +63,16 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <div 
               className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 text-lg"
-              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--accent-gold)', border: '1px solid var(--border-color)' }}
+              style={{ 
+                backgroundColor: 'var(--bg-primary)', 
+                color: 'var(--accent-gold)', 
+                border: '1px solid var(--border-color)' 
+              }}
             >
               <FontAwesomeIcon icon={faRotateLeft} />
             </div>
             <div>
-              <h5 className="font-bold text-sm">30-Day Royal Return</h5>
+              <h5 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>30-Day Royal Return</h5>
               <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>Hassle-free replacement policy</p>
             </div>
           </div>
@@ -93,11 +105,11 @@ export default function Footer() {
             <h4 className="font-bold text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--accent-gold)' }}>
               Quick Navigation
             </h4>
-            <ul className="space-y-2.5 text-xs font-medium">
-              <li><Link href="/" className="hover:underline">Home</Link></li>
-              <li><Link href="/products" className="hover:underline">Browse Collection</Link></li>
-              <li><Link href="/categories" className="hover:underline">All Categories</Link></li>
-              <li><Link href="/about" className="hover:underline">Our Legacy</Link></li>
+            <ul className="space-y-2.5 text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
+              <li><Link href="/" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>Home</Link></li>
+              <li><Link href="/products" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>Browse Collection</Link></li>
+              <li><Link href="/categories" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>All Categories</Link></li>
+              <li><Link href="/about" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>Our Legacy</Link></li>
             </ul>
           </div>
 
@@ -105,11 +117,11 @@ export default function Footer() {
             <h4 className="font-bold text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--accent-gold)' }}>
               Customer Care
             </h4>
-            <ul className="space-y-2.5 text-xs font-medium">
-              <li><Link href="/profile" className="hover:underline">My Account</Link></li>
-              <li><Link href="/orders" className="hover:underline">Track Order</Link></li>
-              <li><Link href="/cart" className="hover:underline">View Shopping Bag</Link></li>
-              <li><Link href="/contact" className="hover:underline">Support & Contact</Link></li>
+            <ul className="space-y-2.5 text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
+              <li><Link href="/profile" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>My Account</Link></li>
+              <li><Link href="/orders" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>Track Order</Link></li>
+              <li><Link href="/cart" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>View Shopping Bag</Link></li>
+              <li><Link href="/contact" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>Support & Contact</Link></li>
             </ul>
           </div>
 
@@ -117,10 +129,10 @@ export default function Footer() {
             <h4 className="font-bold text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--accent-gold)' }}>
               Legal Information
             </h4>
-            <ul className="space-y-2.5 text-xs font-medium">
-              <li><Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:underline">Terms of Service</Link></li>
-              <li><Link href="/refund-policy" className="hover:underline">Refund Policy</Link></li>
+            <ul className="space-y-2.5 text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
+              <li><Link href="/privacy-policy" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>Terms of Service</Link></li>
+              <li><Link href="/refund-policy" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>Refund Policy</Link></li>
             </ul>
           </div>
 
@@ -133,8 +145,8 @@ export default function Footer() {
         >
           <p>© {new Date().getFullYear()} NOIR & GOLD. All rights reserved.</p>
           <div className="flex gap-4 font-semibold">
-            <Link href="/privacy-policy" className="hover:underline">Privacy</Link>
-            <Link href="/terms" className="hover:underline">Terms</Link>
+            <Link href="/privacy-policy" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>Privacy</Link>
+            <Link href="/terms" className="hover:opacity-80 transition-opacity" style={{ color: 'var(--text-secondary)' }}>Terms</Link>
           </div>
         </div>
 

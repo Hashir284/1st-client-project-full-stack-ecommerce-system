@@ -78,27 +78,26 @@ const CRAFTSMANSHIP_STEPS = [
 ];
 
 export default function Home() {
-  
   const [activeLookbook, setActiveLookbook] = useState(0);
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useApp();
 
   useEffect(() => {
-  if (isMobileMenuOpen) {
-    const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
-  } else {
-    const scrollY = document.body.style.top;
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    window.scrollTo(0, parseInt(scrollY || '0') * -1);
-  }
-}, [isMobileMenuOpen]);
+    if (isMobileMenuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
+  }, [isMobileMenuOpen]);
 
   return (
-    <div className={''}>
+    <div>
       <Header />
       <div 
         onClick={() => isMobileMenuOpen && setIsMobileMenuOpen(false)} 
@@ -173,7 +172,10 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex items-end p-8">
                   <div>
-                    <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded bg-amber-400 text-black mb-2 inline-block">
+                    <span 
+                      className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded mb-2 inline-block"
+                      style={{ backgroundColor: 'var(--accent-gold)', color: 'var(--black)' }}
+                    >
                       Horology Series
                     </span>
                     <h3 className="text-xl font-bold text-white">The Royal Chronograph 42mm</h3>
@@ -212,7 +214,7 @@ export default function Home() {
         <section className="py-16" style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="text-xs uppercase font-extrabold tracking-widest text-amber-500">Horological Artistry</span>
+              <span className="text-xs uppercase font-extrabold tracking-widest" style={{ color: 'var(--accent-gold)' }}>Horological Artistry</span>
               <h2 className="text-3xl font-black mt-2">Built to Last Generations</h2>
               <p className="text-xs sm:text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
                 Every timepiece undergoes 200+ hours of micro-engineering and precision testing.
@@ -221,8 +223,12 @@ export default function Home() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {CRAFTSMANSHIP_STEPS.map((step, idx) => (
-                <div key={idx} className="p-6 rounded-2xl bg-white/5 border border-amber-500/10 hover:border-amber-500/40 transition-all">
-                  <FontAwesomeIcon icon={faShieldHalved} className="text-amber-400 text-xl mb-3" />
+                <div 
+                  key={idx} 
+                  className="p-6 rounded-2xl border transition-all hover:border-[var(--accent-gold)]"
+                  style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)' }}
+                >
+                  <FontAwesomeIcon icon={faShieldHalved} className="text-xl mb-3" style={{ color: 'var(--accent-gold)' }} />
                   <h3 className="font-bold text-sm mb-1">{step.title}</h3>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{step.desc}</p>
                 </div>
@@ -266,7 +272,7 @@ export default function Home() {
                   <span>Stock Left: {FLASH_DEAL_PRODUCT.stockLeft}</span>
                   <span className="opacity-60">Total: {FLASH_DEAL_PRODUCT.totalStock}</span>
                 </div>
-                <div className="w-full h-2.5 rounded-full overflow-hidden bg-black/20">
+                <div className="w-full h-2.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--border-color)' }}>
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{ width: `${(FLASH_DEAL_PRODUCT.stockLeft / FLASH_DEAL_PRODUCT.totalStock) * 100}%`, backgroundColor: 'var(--accent-gold)' }}
@@ -286,7 +292,8 @@ export default function Home() {
               <img
                 src={FLASH_DEAL_PRODUCT.image}
                 alt={FLASH_DEAL_PRODUCT.name}
-                className="w-full max-w-md h-80 sm:h-96 object-cover rounded-2xl shadow-xl border border-white/10"
+                className="w-full max-w-md h-80 sm:h-96 object-cover rounded-2xl shadow-xl"
+                style={{ border: '1px solid var(--border-color)' }}
               />
             </div>
           </div>
@@ -316,7 +323,7 @@ export default function Home() {
               >
                 <img src={cat.bgImg} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 text-white">
-                  <div className="text-2xl mb-2 text-amber-400">
+                  <div className="text-2xl mb-2" style={{ color: 'var(--accent-gold)' }}>
                     <FontAwesomeIcon icon={cat.icon} />
                   </div>
                   <h3 className="font-extrabold text-lg">{cat.name}</h3>
@@ -423,7 +430,7 @@ export default function Home() {
         <section className="py-20" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="text-xs uppercase font-extrabold tracking-widest text-amber-500">Style Guide</span>
+              <span className="text-xs uppercase font-extrabold tracking-widest" style={{ color: 'var(--accent-gold)' }}>Style Guide</span>
               <h2 className="text-3xl sm:text-4xl font-black mt-2">The Horology Lookbook</h2>
               <p className="text-xs sm:text-sm mt-2" style={{ color: 'var(--text-secondary)' }}>
                 Curated watch styling suggestions for galas, executive boardrooms, and outdoor expeditions.
@@ -476,9 +483,9 @@ export default function Home() {
 
         {/* COMMUNITY GALLERY */}
         <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <FontAwesomeIcon icon={faCrown} className="text-3xl text-amber-400 mb-2" />
+          <FontAwesomeIcon icon={faCrown} className="text-3xl mb-2" style={{ color: 'var(--accent-gold)' }} />
           <h2 className="text-2xl font-black">#NoirAndGoldWrist</h2>
-          <p className="text-xs text-neutral-400 mb-8">Share your timepiece setups to be featured in our global horology gallery.</p>
+          <p className="text-xs mb-8" style={{ color: 'var(--text-secondary)' }}>Share your timepiece setups to be featured in our global horology gallery.</p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&q=80" alt="Wrist shot 1" className="rounded-2xl h-48 w-full object-cover hover:scale-105 transition-all duration-300" />
@@ -529,19 +536,26 @@ export default function Home() {
           <div
             className="rounded-3xl p-8 sm:p-14 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden"
             style={{
-              backgroundColor: 'var(--bg-accent)',
+              backgroundColor: 'var(--bg-secondary)',
               border: '2px solid var(--accent-gold)',
-              color: 'var(--text-on-dark)'
+              color: 'var(--text-primary)'
             }}
           >
             <div className="max-w-xl z-10">
-              <span className="text-[10px] uppercase font-black tracking-widest px-3 py-1 rounded-full bg-amber-400/10 text-amber-400 border border-amber-400/20">
+              <span 
+                className="text-[10px] uppercase font-black tracking-widest px-3 py-1 rounded-full border"
+                style={{ 
+                  backgroundColor: 'rgba(212, 175, 55, 0.1)', 
+                  color: 'var(--accent-gold)', 
+                  borderColor: 'rgba(212, 175, 55, 0.2)' 
+                }}
+              >
                 Privileged Circle
               </span>
-              <h2 className="text-2xl sm:text-4xl font-black mt-3 mb-3 text-white">
+              <h2 className="text-2xl sm:text-4xl font-black mt-3 mb-3">
                 Unlock VIP Vault Access
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+              <p className="text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Subscribe for immediate 15% off your first watch order, priority allocation on limited tourbillon drops, and private vault invitations.
               </p>
             </div>
@@ -551,13 +565,18 @@ export default function Home() {
                 <input
                   type="email"
                   placeholder="Enter email for invitation..."
-                  className="px-5 py-3.5 pl-10 rounded-xl text-xs focus:outline-none min-w-[280px] shadow-inner bg-neutral-900 text-white border border-neutral-700 placeholder:text-neutral-500"
+                  className="px-5 py-3.5 pl-10 rounded-xl text-xs focus:outline-none min-w-[280px] shadow-inner"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    color: 'var(--text-primary)',
+                    border: '1px solid var(--border-color)'
+                  }}
                 />
-                <FontAwesomeIcon icon={faEnvelope} className="absolute left-3.5 top-4 text-xs text-amber-400 opacity-80" />
+                <FontAwesomeIcon icon={faEnvelope} className="absolute left-3.5 top-4 text-xs opacity-80" style={{ color: 'var(--accent-gold)' }} />
               </div>
               <button
-                className="px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider text-black hover:bg-amber-300 transition-all active:scale-95 shadow-lg"
-                style={{ backgroundColor: 'var(--accent-gold)' }}
+                className="px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all active:scale-95 shadow-lg"
+                style={{ backgroundColor: 'var(--accent-gold)', color: 'var(--black)' }}
               >
                 Request Access
               </button>
