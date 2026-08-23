@@ -84,11 +84,8 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Jab window 50px se zayada scroll ho
-      
-      if (window.scrollY > 8) {
+      // Jab window 50px se zayada scroll ho -- no
         setIsMobileMenuOpen(false);
-      }
     };
 
     // Scroll listener attach karein
