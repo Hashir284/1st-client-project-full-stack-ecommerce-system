@@ -108,7 +108,7 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
 
         {/* Sliding Sidebar Panel (0.3s Ease Animation) */}
         <aside 
-          className={`relative w-[75%] max-w-[290px] h-full bg-[var(--bg-accent,#08080A)] text-[var(--text-primary,#FFFFFF)] pt-8 pb-6 px-6 flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-in-out ${
+          className={`relative w-[75%] max-w-[290px] h-100dvh bg-[var(--bg-accent,#08080A)] text-[var(--text-primary,#FFFFFF)] pt-8 pb-6 px-6 flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-in-out ${
             isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
