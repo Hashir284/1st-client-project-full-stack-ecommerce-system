@@ -42,7 +42,7 @@
   --text-neutral-300: #D4D4D4;  /* tailwind neutral-300, VIP banner desc text */
 
   /* Gold family */
-  --accent-gold: #D3AF37;
+  --accent-gold: #996515;
   --accent-gold-hover: #D4AF37;
   --accent-gold-soft: rgba(212, 175, 55, 0.08);   /* hero badge bg */
   --accent-gold-soft-2: rgba(212, 175, 55, 0.1);  /* brand feature icon bg */
