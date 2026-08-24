@@ -24,6 +24,7 @@ import Header from '../Header';
 import CategorySliderSection from './CategorySliderSection';
 import FilteredShowcaseCarousel from './FeaturesSection';
 import HeroSection from './HeroSection';
+import SpotlightSection from './SpotlightSection';
 
 const BRAND_FEATURES = [
   { icon: faTruckFast, title: 'Express Worldwide Shipping', desc: 'Complimentary insured shipping on orders over $200' },
@@ -111,6 +112,7 @@ export default function Home() {
         <HeroSection />
 
         <CategorySliderSection />
+        <SpotlightSection />
         {/* <FilteredShowcaseCarousel/> */}
 
         {/* BRAND VALUE PROPOSITIONS */}
