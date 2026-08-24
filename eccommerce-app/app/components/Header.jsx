@@ -53,34 +53,82 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
 
   return (
     <>
-      {/* MOBILE TOP BAR WITH LOGO AND MENU BUTTON */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-30 px-4 py-3 bg-[var(--bg-secondary)]/90 backdrop-blur-md border-b border-[var(--border-color)] flex items-center justify-between shadow-md">
-        {/* Menu Hamburger Button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(true)}
-          className="w-10 h-10 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-xl flex flex-col justify-center items-center gap-[4px] active:scale-95 transition-transform"
-          aria-label="Open Navigation"
+      {/* MOBILE TOP BAR WITH LOGO, SEARCH, AND CART */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-30 bg-[var(--bg-secondary)]/90 backdrop-blur-md border-b border-[var(--border-color)] shadow-md">
+        <div className="px-4 py-3 flex items-center justify-between">
+          {/* Menu Hamburger Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="w-10 h-10 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-xl flex flex-col justify-center items-center gap-[4px] active:scale-95 transition-transform shrink-0"
+            aria-label="Open Navigation"
+          >
+            <span className="w-4 h-[2px] bg-[var(--accent-gold)] rounded-full"></span>
+            <span className="w-4 h-[2px] bg-[var(--accent-gold)] rounded-full"></span>
+            <span className="w-4 h-[2px] bg-[var(--accent-gold)] rounded-full"></span>
+          </button>
+
+          {/* Mobile Header Logo */}
+          <Link href="/" className="text-xl font-black tracking-widest flex items-center gap-2 truncate px-2">
+            <FontAwesomeIcon icon={faGem} className="text-[var(--accent-gold)] w-5 h-5 shrink-0" />
+            <span>NOIR<span className="text-[var(--accent-gold)]">&</span>GOLD</span>
+          </Link>
+
+          {/* Mobile Right Icons (Search & Cart Side-by-Side) */}
+          <div className="flex items-center gap-1 shrink-0">
+            {/* MOBILE SEARCH TRIGGER BUTTON */}
+            <button
+              onClick={() => setIsSearchOpen((prev) => !prev)}
+              className={`p-2 rounded-xl transition-all ${
+                isSearchOpen 
+                  ? 'text-[var(--accent-gold)] bg-white/10' 
+                  : 'text-[var(--text-secondary)] hover:text-[var(--accent-gold)]'
+              }`}
+              aria-label="Toggle Mobile Search Bar"
+            >
+              <FontAwesomeIcon icon={isSearchOpen ? faXmark : faMagnifyingGlass} className="w-4 h-4" />
+            </button>
+
+            {/* Mobile Cart Icon */}
+            <Link href="/cart" className="relative p-2 rounded-xl text-[var(--text-secondary)]">
+              <FontAwesomeIcon icon={faCartShopping} className="w-4 h-4 text-[var(--accent-gold)]" />
+              {cartCount > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 rounded-full bg-[var(--brand-red)] text-[var(--text-on-dark)] font-black text-[9px] flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+          </div>
+        </div>
+
+        {/* MOBILE DROPDOWN SEARCH BAR (Same behavior as Desktop) */}
+        <div
+          className={`transition-all duration-300 ease-in-out border-t border-[var(--border-color)] bg-[var(--bg-accent)] ${
+            isSearchOpen ? 'max-h-20 opacity-100 py-2.5 px-4' : 'max-h-0 opacity-0 py-0 px-4 overflow-hidden'
+          }`}
         >
-          <span className="w-4 h-[2px] bg-[var(--accent-gold)] rounded-full"></span>
-          <span className="w-4 h-[2px] bg-[var(--accent-gold)] rounded-full"></span>
-          <span className="w-4 h-[2px] bg-[var(--accent-gold)] rounded-full"></span>
-        </button>
-
-        {/* Mobile Header Logo */}
-        <Link href="/" className="text-xl font-black tracking-widest flex items-center gap-2">
-          <FontAwesomeIcon icon={faGem} className="text-[var(--accent-gold)] w-5 h-5 shrink-0" />
-          <span>NOIR<span className="text-[var(--accent-gold)]">&</span>GOLD</span>
-        </Link>
-
-        {/* Cart Quick Icon for Mobile Header */}
-        <Link href="/cart" className="relative p-2 rounded-xl text-[var(--text-secondary)]">
-          <FontAwesomeIcon icon={faCartShopping} className="w-4 h-4 text-[var(--accent-gold)]" />
-          {cartCount > 0 && (
-            <span className="absolute top-0 right-0 w-4 h-4 rounded-full bg-[var(--brand-red)] text-[var(--text-on-dark)] font-black text-[9px] flex items-center justify-center">
-              {cartCount}
-            </span>
-          )}
-        </Link>
+          <div className="relative w-full flex items-center">
+            <input
+              type="text"
+              placeholder="Search watches, accessories..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              autoFocus={isSearchOpen}
+              className="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl pl-9 pr-14 py-2 text-xs text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-gold)] placeholder:text-[var(--text-secondary)] shadow-inner"
+            />
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="absolute left-3 text-[var(--text-secondary)] w-3.5 h-3.5 pointer-events-none"
+            />
+            
+            {/* CLOSE BUTTON INSIDE SEARCH BAR */}
+            <button
+              onClick={() => setIsSearchOpen(false)}
+              className="absolute right-2 px-2 py-0.5 rounded-md bg-[var(--bg-primary)] border border-[var(--border-color)] text-[10px] font-bold text-[var(--text-secondary)] hover:text-[var(--accent-gold)] transition-all active:scale-95"
+            >
+              CLOSE
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* DESKTOP HEADER */}
@@ -139,7 +187,7 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
             </div>
           </div>
 
-          {/* DROPDOWN SEARCH BAR WITH ESC BUTTON */}
+          {/* DESKTOP DROPDOWN SEARCH BAR WITH ESC BUTTON */}
           <div
             className={`transition-all duration-300 ease-in-out border-t border-[var(--border-color)] bg-[var(--bg-accent)] ${
               isSearchOpen ? 'max-h-20 opacity-100 py-3 px-8' : 'max-h-0 opacity-0 py-0 px-8 overflow-hidden'
@@ -202,20 +250,6 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
                 <FontAwesomeIcon icon={faGem} className="text-[var(--accent-gold)] w-6 h-6" />
                 <span>NOIR<span className="text-[var(--accent-gold)]">&</span>GOLD</span>
               </Link>
-            </div>
-
-            <div className="relative my-2">
-              <input 
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl pl-10 pr-3 py-2 text-[13px] text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-gold)] placeholder:text-[var(--text-secondary)]"
-              />
-              <FontAwesomeIcon 
-                icon={faMagnifyingGlass} 
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)] w-3.5 h-3.5" 
-              />
             </div>
 
             <nav className="flex flex-col">
