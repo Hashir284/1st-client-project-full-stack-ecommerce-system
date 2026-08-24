@@ -110,7 +110,7 @@ export default function Home() {
         {/* HERO SECTION */}
         <HeroSection />
 
-        {/* <CategorySliderSection /> */}
+        <CategorySliderSection />
         <FilteredShowcaseCarousel/>
 
         {/* BRAND VALUE PROPOSITIONS */}

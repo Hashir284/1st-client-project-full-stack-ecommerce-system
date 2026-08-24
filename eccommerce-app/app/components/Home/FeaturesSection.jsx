@@ -18,54 +18,79 @@ const FILTERS = [
   { key: 'new', label: 'New Arrival' },
 ];
 
+const TYPE_FILTERS = [
+  { key: 'all', label: 'All Items' },
+  { key: 'watch', label: 'Watches' },
+  { key: 'wallet', label: 'Wallets' },
+];
+
 const SHOWCASE_PRODUCTS = [
-  // WOMEN — 10 items
-  { id: 'w1', category: 'women', name: 'Petal Rose Gold Mesh Slim', price: 460, rating: 5, image: 'https://images.unsplash.com/photo-1657159810148-f6a1f3d74f7e?w=600&q=80' },
-  { id: 'w2', category: 'women', name: 'Halo Mother-of-Pearl Dress', price: 520, rating: 5, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
-  { id: 'w3', category: 'women', name: 'Blossom Two-Tone Bangle Watch', price: 395, rating: 4, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
-  { id: 'w4', category: 'women', name: 'Ivory Pearl Dial Bracelet Watch', price: 445, rating: 5, image: 'https://images.unsplash.com/photo-1657159810148-f6a1f3d74f7e?w=600&q=80' },
-  { id: 'w5', category: 'women', name: 'Willow Slim Gold Chain Watch', price: 410, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
-  { id: 'w6', category: 'women', name: 'Cascade Diamond-Cut Bezel Watch', price: 590, rating: 5, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
-  { id: 'w7', category: 'women', name: 'Serene Rose Quartz Dial Watch', price: 375, rating: 4, image: 'https://images.unsplash.com/photo-1657159810148-f6a1f3d74f7e?w=600&q=80' },
-  { id: 'w8', category: 'women', name: 'Blush Enamel Petite Watch', price: 355, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
-  { id: 'w9', category: 'women', name: 'Aria Sunburst Dial Mesh Watch', price: 505, rating: 5, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
-  { id: 'w10', category: 'women', name: 'Lumen Champagne Gold Watch', price: 480, rating: 5, image: 'https://images.unsplash.com/photo-1657159810148-f6a1f3d74f7e?w=600&q=80' },
+  // WOMEN — 10 watch items
+  { id: 'w1', category: 'women', type: 'watch', name: 'Petal Rose Gold Mesh Slim', price: 460, rating: 5, image: 'https://images.unsplash.com/photo-1657159810148-f6a1f3d74f7e?w=600&q=80' },
+  { id: 'w2', category: 'women', type: 'watch', name: 'Halo Mother-of-Pearl Dress', price: 520, rating: 5, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
+  { id: 'w3', category: 'women', type: 'watch', name: 'Blossom Two-Tone Bangle Watch', price: 395, rating: 4, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+  { id: 'w4', category: 'women', type: 'watch', name: 'Ivory Pearl Dial Bracelet Watch', price: 445, rating: 5, image: 'https://images.unsplash.com/photo-1657159810148-f6a1f3d74f7e?w=600&q=80' },
+  { id: 'w5', category: 'women', type: 'watch', name: 'Willow Slim Gold Chain Watch', price: 410, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
+  { id: 'w6', category: 'women', type: 'watch', name: 'Cascade Diamond-Cut Bezel Watch', price: 590, rating: 5, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+  { id: 'w7', category: 'women', type: 'watch', name: 'Serene Rose Quartz Dial Watch', price: 375, rating: 4, image: 'https://images.unsplash.com/photo-1657159810148-f6a1f3d74f7e?w=600&q=80' },
+  { id: 'w8', category: 'women', type: 'watch', name: 'Blush Enamel Petite Watch', price: 355, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
+  { id: 'w9', category: 'women', type: 'watch', name: 'Aria Sunburst Dial Mesh Watch', price: 505, rating: 5, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+  { id: 'w10', category: 'women', type: 'watch', name: 'Lumen Champagne Gold Watch', price: 480, rating: 5, image: 'https://images.unsplash.com/photo-1657159810148-f6a1f3d74f7e?w=600&q=80' },
 
-  // MEN — 14 items
-  { id: 'm1', category: 'men', name: 'Foundry Titanium Dive 300m', price: 690, rating: 5, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
-  { id: 'm2', category: 'men', name: 'Ledger Leather Strap Classic', price: 410, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
-  { id: 'm3', category: 'men', name: 'Ironclad Field Watch 40mm', price: 380, rating: 4, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
-  { id: 'm4', category: 'men', name: 'Sentinel Chronograph Steel', price: 610, rating: 5, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
-  { id: 'm5', category: 'men', name: 'Anvil Rugged Utility Watch', price: 340, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
-  { id: 'm6', category: 'men', name: 'Marshal Black IP Bracelet Watch', price: 495, rating: 4, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
-  { id: 'm7', category: 'men', name: 'Cordage Brown Leather Aviator', price: 425, rating: 5, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
-  { id: 'm8', category: 'men', name: 'Bastion GMT Dual Time', price: 720, rating: 5, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
-  { id: 'm9', category: 'men', name: 'Redwood Vintage Field Watch', price: 365, rating: 4, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
-  { id: 'm10', category: 'men', name: 'Voyager Titanium Sport Watch', price: 655, rating: 5, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
-  { id: 'm11', category: 'men', name: 'Garrison Matte Black Diver', price: 470, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
-  { id: 'm12', category: 'men', name: 'Empire Rose Gold Steel Watch', price: 585, rating: 5, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
-  { id: 'm13', category: 'men', name: 'Northgate Canvas Strap Watch', price: 320, rating: 4, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
-  { id: 'm14', category: 'men', name: 'Praetor Sapphire Crystal Watch', price: 745, rating: 5, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
+  // WOMEN — wallets
+  { id: 'ww1', category: 'women', type: 'wallet', name: 'Ivory Quilted Cardholder', price: 210, rating: 5, image: 'https://images.unsplash.com/photo-1606503825008-909a6331a333?w=600&q=80' },
+  { id: 'ww2', category: 'women', type: 'wallet', name: 'Blush Leather Zip Purse', price: 245, rating: 4, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80' },
+  { id: 'ww3', category: 'women', type: 'wallet', name: 'Rose Gold Clasp Wallet', price: 260, rating: 5, image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&q=80' },
 
-  // COUPLE — 4 items
-  { id: 'cp1', category: 'couple', name: 'Meridian Matching Steel Duo', price: 880, rating: 5, image: 'https://images.unsplash.com/photo-1657159810148-f6a1f3d74f7e?w=600&q=80' },
-  { id: 'cp2', category: 'couple', name: 'Aurora His & Hers Gift Set', price: 950, rating: 5, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
-  { id: 'cp3', category: 'couple', name: 'Twin Flame Rose & Steel Set', price: 830, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
-  { id: 'cp4', category: 'couple', name: 'Union Leather Duo Box Set', price: 760, rating: 5, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+  // MEN — 14 watch items
+  { id: 'm1', category: 'men', type: 'watch', name: 'Foundry Titanium Dive 300m', price: 690, rating: 5, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
+  { id: 'm2', category: 'men', type: 'watch', name: 'Ledger Leather Strap Classic', price: 410, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
+  { id: 'm3', category: 'men', type: 'watch', name: 'Ironclad Field Watch 40mm', price: 380, rating: 4, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+  { id: 'm4', category: 'men', type: 'watch', name: 'Sentinel Chronograph Steel', price: 610, rating: 5, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
+  { id: 'm5', category: 'men', type: 'watch', name: 'Anvil Rugged Utility Watch', price: 340, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
+  { id: 'm6', category: 'men', type: 'watch', name: 'Marshal Black IP Bracelet Watch', price: 495, rating: 4, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+  { id: 'm7', category: 'men', type: 'watch', name: 'Cordage Brown Leather Aviator', price: 425, rating: 5, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
+  { id: 'm8', category: 'men', type: 'watch', name: 'Bastion GMT Dual Time', price: 720, rating: 5, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
+  { id: 'm9', category: 'men', type: 'watch', name: 'Redwood Vintage Field Watch', price: 365, rating: 4, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+  { id: 'm10', category: 'men', type: 'watch', name: 'Voyager Titanium Sport Watch', price: 655, rating: 5, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
+  { id: 'm11', category: 'men', type: 'watch', name: 'Garrison Matte Black Diver', price: 470, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
+  { id: 'm12', category: 'men', type: 'watch', name: 'Empire Rose Gold Steel Watch', price: 585, rating: 5, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+  { id: 'm13', category: 'men', type: 'watch', name: 'Northgate Canvas Strap Watch', price: 320, rating: 4, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
+  { id: 'm14', category: 'men', type: 'watch', name: 'Praetor Sapphire Crystal Watch', price: 745, rating: 5, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
 
-  // NEW ARRIVAL — 3 items
-  { id: 'n1', category: 'new', name: 'Drift Ceramic Bezel Diver', price: 610, rating: 4, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
-  { id: 'n2', category: 'new', name: 'Obsidian Square Dial Automatic', price: 540, rating: 5, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
-  { id: 'n3', category: 'new', name: 'Frostline Silver Mesh Watch', price: 495, rating: 4, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+  // MEN — wallets
+  { id: 'mw1', category: 'men', type: 'wallet', name: 'Slim Bifold Leather Wallet', price: 180, rating: 4, image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&q=80' },
+  { id: 'mw2', category: 'men', type: 'wallet', name: 'Armor Zip-Around Wallet', price: 225, rating: 5, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80' },
+  { id: 'mw3', category: 'men', type: 'wallet', name: 'Executive Cardholder', price: 195, rating: 4, image: 'https://images.unsplash.com/photo-1606503825008-909a6331a333?w=600&q=80' },
+
+  // COUPLE — 4 items (watches)
+  { id: 'cp1', category: 'couple', type: 'watch', name: 'Meridian Matching Steel Duo', price: 880, rating: 5, image: 'https://images.unsplash.com/photo-1657159810148-f6a1f3d74f7e?w=600&q=80' },
+  { id: 'cp2', category: 'couple', type: 'watch', name: 'Aurora His & Hers Gift Set', price: 950, rating: 5, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
+  { id: 'cp3', category: 'couple', type: 'watch', name: 'Twin Flame Rose & Steel Set', price: 830, rating: 4, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
+  { id: 'cp4', category: 'couple', type: 'watch', name: 'Union Leather Duo Box Set', price: 760, rating: 5, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+
+  // COUPLE — wallet set
+  { id: 'cpw1', category: 'couple', type: 'wallet', name: 'His & Hers Wallet Duo', price: 380, rating: 5, image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&q=80' },
+
+  // NEW ARRIVAL — 3 items (watches)
+  { id: 'n1', category: 'new', type: 'watch', name: 'Drift Ceramic Bezel Diver', price: 610, rating: 4, image: 'https://images.unsplash.com/photo-1689214105015-c0efaf1184d3?w=600&q=80' },
+  { id: 'n2', category: 'new', type: 'watch', name: 'Obsidian Square Dial Automatic', price: 540, rating: 5, image: 'https://images.unsplash.com/photo-1758071348980-d1eed770f34f?w=600&q=80' },
+  { id: 'n3', category: 'new', type: 'watch', name: 'Frostline Silver Mesh Watch', price: 495, rating: 4, image: 'https://images.unsplash.com/photo-1640943704396-f83f07a476bf?w=600&q=80' },
+
+  // NEW ARRIVAL — wallet
+  { id: 'nw1', category: 'new', type: 'wallet', name: 'Onyx Minimalist Cardholder', price: 215, rating: 5, image: 'https://images.unsplash.com/photo-1606503825008-909a6331a333?w=600&q=80' },
 ];
 
 export default function WomenMenCoupleNewArrivalSection() {
   const [activeFilter, setActiveFilter] = useState('women');
+  const [activeType, setActiveType] = useState('all');
   const [activeIndex, setActiveIndex] = useState(0);
   const [canScroll, setCanScroll] = useState(false);
   const trackRef = useRef(null);
 
-  const filtered = SHOWCASE_PRODUCTS.filter((p) => p.category === activeFilter);
+  const filtered = SHOWCASE_PRODUCTS.filter(
+    (p) => p.category === activeFilter && (activeType === 'all' || p.type === activeType)
+  );
 
   const checkOverflow = useCallback(() => {
     const el = trackRef.current;
@@ -80,7 +105,7 @@ export default function WomenMenCoupleNewArrivalSection() {
     setActiveIndex(0);
     const id = requestAnimationFrame(checkOverflow);
     return () => cancelAnimationFrame(id);
-  }, [activeFilter, checkOverflow]);
+  }, [activeFilter, activeType, checkOverflow]);
 
   useEffect(() => {
     window.addEventListener('resize', checkOverflow);
@@ -102,7 +127,7 @@ export default function WomenMenCoupleNewArrivalSection() {
     const cardWidth = el.children[0].offsetWidth;
     const gap = 16; // Mobile gap (gap-4 = 16px)
     const index = Math.round(scrollLeft / (cardWidth + gap));
-    
+
     setActiveIndex(Math.min(Math.max(index, 0), filtered.length - 1));
   };
 
@@ -146,9 +171,9 @@ export default function WomenMenCoupleNewArrivalSection() {
           </h2>
         </div>
 
-        {/* FILTER TABS */}
+        {/* FILTER TABS — WHO IT'S FOR */}
         <div
-          className="flex items-center justify-start sm:justify-center gap-2 sm:gap-4 overflow-x-auto pb-3 mb-6 sm:mb-10 scrollbar-hide"
+          className="flex items-center justify-start sm:justify-center gap-2 sm:gap-4 overflow-x-auto pb-3 mb-3 sm:mb-4 scrollbar-hide"
           style={{ scrollbarWidth: 'none' }}
         >
           {FILTERS.map((f) => (
@@ -163,6 +188,27 @@ export default function WomenMenCoupleNewArrivalSection() {
               }}
             >
               {f.label}
+            </button>
+          ))}
+        </div>
+
+        {/* FILTER TABS — WATCH / WALLET TYPE */}
+        <div
+          className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-6 sm:mb-10 scrollbar-hide"
+          style={{ scrollbarWidth: 'none' }}
+        >
+          {TYPE_FILTERS.map((t) => (
+            <button
+              key={t.key}
+              onClick={() => setActiveType(t.key)}
+              className="shrink-0 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wider transition-all duration-300"
+              style={{
+                backgroundColor: activeType === t.key ? 'var(--accent-gold)' : 'var(--bg-secondary)',
+                color: activeType === t.key ? 'var(--black)' : 'var(--text-secondary)',
+                border: '1px solid var(--border-color)',
+              }}
+            >
+              {t.label}
             </button>
           ))}
         </div>
