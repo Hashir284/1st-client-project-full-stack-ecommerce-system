@@ -62,9 +62,9 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
             className="w-10 h-10 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-xl flex flex-col justify-center items-center gap-[4px] active:scale-95 transition-transform shrink-0"
             aria-label="Open Navigation"
           >
-            <span className="w-4 h-[2px] bg-black rounded-full"></span>
-            <span className="w-4 h-[2px] bg-black rounded-full"></span>
-            <span className="w-4 h-[2px] bg-black rounded-full"></span>
+            <span className="w-4 h-[2px] bg-[var(--text-primary)] rounded-full"></span>
+            <span className="w-4 h-[2px] bg-[var(--text-primary)] rounded-full"></span>
+            <span className="w-4 h-[2px] bg-[var(--text-primary)] rounded-full"></span>
           </button>
 
           {/* Mobile Header Logo */}
