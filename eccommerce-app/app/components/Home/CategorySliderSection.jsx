@@ -9,9 +9,9 @@ const SHOP_EDIT = [
     type: 'watch',
     gender: 'men',
     cal: 'Cal. 01',
-    tag: 'GRAB & GO',
-    title: 'The Daily Wear',
-    desc: 'Scratch-resistant, shock-tested pieces built for a watch that never leaves your wrist.',
+    tag: 'EVERYDAY CLASSIC',
+    title: 'Daily Wear Watches',
+    desc: 'Scratch-resistant, shock-tested timepieces built to stay on your wrist every single day.',
     image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=700&q=80',
     link: '/categories/daily-wear',
   },
@@ -20,8 +20,8 @@ const SHOP_EDIT = [
     gender: 'men',
     cal: 'Cal. 02',
     tag: 'MINIMALIST CARRY',
-    title: 'Slim Bifold Wallet',
-    desc: 'Handcrafted genuine leather with RFID-blocking protection for essential cards and cash.',
+    title: 'Slim Bifold Wallets',
+    desc: 'Handcrafted genuine leather with built-in RFID protection for essential cards and cash.',
     image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=700&q=80',
     link: '/categories/wallets',
   },
@@ -29,9 +29,9 @@ const SHOP_EDIT = [
     type: 'watch',
     gender: 'women',
     cal: 'Cal. 03',
-    tag: 'GIFTED TOGETHER',
-    title: 'Set for Two',
-    desc: 'Matching his-and-hers dials, boxed together for anniversaries and proposals alike.',
+    tag: 'COUPLE COLLECTIONS',
+    title: 'His & Hers Sets',
+    desc: 'Matching twin-dial sets beautifully boxed for anniversaries and special celebrations.',
     image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=700&q=80',
     link: '/categories/set-for-two',
   },
@@ -39,9 +39,9 @@ const SHOP_EDIT = [
     type: 'wallet',
     gender: 'women',
     cal: 'Cal. 04',
-    tag: 'EXECUTIVE CLASS',
-    title: 'Classic Cardholder',
-    desc: 'Ultra-thin profile featuring top-grain leather designed for effortless pocket access.',
+    tag: 'EXECUTIVE ACCESSORIES',
+    title: 'Classic Cardholders',
+    desc: 'Ultra-thin profiles crafted from premium top-grain leather for effortless front-pocket carry.',
     image: 'https://images.unsplash.com/photo-1606503825008-909a6331a333?w=700&q=80',
     link: '/categories/wallets',
   },
@@ -49,9 +49,9 @@ const SHOP_EDIT = [
     type: 'watch',
     gender: 'men',
     cal: 'Cal. 05',
-    tag: 'FORMAL TO OFF-DUTY',
-    title: 'Desk to Dinner',
-    desc: 'One watch that clears a boardroom and a dinner reservation without missing a beat.',
+    tag: 'DRESS & FORMAL',
+    title: 'Executive Dials',
+    desc: 'Versatile automatic & quartz watches designed to transition seamlessly from boardrooms to dinners.',
     image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=700&q=80',
     link: '/categories/desk-to-dinner',
   },
@@ -59,9 +59,9 @@ const SHOP_EDIT = [
     type: 'wallet',
     gender: 'women',
     cal: 'Cal. 06',
-    tag: 'TACTICAL GEAR',
-    title: 'Armor Zip Wallet',
-    desc: 'Heavy-duty zip-around wallet crafted with reinforced stitching and military-grade durability.',
+    tag: 'TACTICAL ORGANIZERS',
+    title: 'Zip-Around Wallets',
+    desc: 'Heavy-duty leather wallets featuring reinforced stitching and all-around secure closures.',
     image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700&q=80',
     link: '/categories/wallets',
   },
@@ -69,9 +69,9 @@ const SHOP_EDIT = [
     type: 'watch',
     gender: 'women',
     cal: 'Cal. 07',
-    tag: 'RUN LIMITED',
-    title: 'Vault Exclusives',
-    desc: 'Numbered editions held back from the main catalog, released only to the Sovereign Club.',
+    tag: 'LIMITED EDITION',
+    title: 'Vault Timepieces',
+    desc: 'Numbered luxury editions held back from the main catalog for exclusive club members.',
     image: 'https://images.unsplash.com/photo-1622434641406-a158123450f9?w=700&q=80',
     link: '/categories/vault',
   },
@@ -136,13 +136,13 @@ export default function ShopTheEditCarousel() {
               className="text-xs uppercase font-extrabold tracking-[0.25em] block mb-2"
               style={{ color: 'var(--accent-gold)' }}
             >
-              PICKED BY CALIBER
+              CURATED COLLECTIONS
             </span>
             <h2 className="text-3xl sm:text-5xl font-black tracking-tight">
-              Shop the <span style={{ color: 'var(--accent-gold)' }}>Edit</span>
+              Explore <span style={{ color: 'var(--accent-gold)' }}>Categories</span>
             </h2>
             <p className="text-xs sm:text-sm mt-3 max-w-md" style={{ color: 'var(--text-secondary)' }}>
-              Movements & accessories — scroll through to find the one built for yours.
+              From precision movements to premium leather essentials — browse collections crafted for your lifestyle.
             </p>
           </div>
 
@@ -326,7 +326,7 @@ export default function ShopTheEditCarousel() {
                           color: 'var(--text-primary)',
                         }}
                       >
-                        Shop {item.title} <FontAwesomeIcon icon={faArrowRight} className="text-[10px]" />
+                        Explore Category <FontAwesomeIcon icon={faArrowRight} className="text-[10px]" />
                       </Link>
                     </div>
                   </div>
@@ -334,7 +334,7 @@ export default function ShopTheEditCarousel() {
               ))
             ) : (
               <div className="w-full py-12 text-center text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-secondary)' }}>
-                No items match the selected combination.
+                No category available for this selection.
               </div>
             )}
           </div>

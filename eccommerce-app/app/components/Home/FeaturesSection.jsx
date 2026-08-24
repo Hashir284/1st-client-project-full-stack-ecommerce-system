@@ -9,7 +9,7 @@ import {
   faHeart,
   faStar,
   faCartShopping,
-} from '../../icons'; // Adjust path if neededd
+} from '../../icons'; // Adjust path if needed
 
 const FILTERS = [
   { key: 'men', label: 'Men' },

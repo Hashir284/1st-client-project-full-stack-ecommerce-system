@@ -53,17 +53,34 @@ export default function Header({ cartCount = 3, wishlistCount = 5 }) {
 
   return (
     <>
-      {/* MOBILE TRIGGER BUTTON */}
-      <div className="lg:hidden fixed top-4 left-4 z-30">
+      {/* MOBILE TOP BAR WITH LOGO AND MENU BUTTON */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-30 px-4 py-3 bg-[var(--bg-secondary)]/90 backdrop-blur-md border-b border-[var(--border-color)] flex items-center justify-between shadow-md">
+        {/* Menu Hamburger Button */}
         <button
           onClick={() => setIsMobileMenuOpen(true)}
-          className="w-11 h-11 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl flex flex-col justify-center items-center gap-[5px] active:scale-95 transition-transform shadow-lg"
+          className="w-10 h-10 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-xl flex flex-col justify-center items-center gap-[4px] active:scale-95 transition-transform"
           aria-label="Open Navigation"
         >
-          <span className="w-5 h-[2.5px] bg-[var(--accent-gold)] rounded-full"></span>
-          <span className="w-5 h-[2.5px] bg-[var(--accent-gold)] rounded-full"></span>
-          <span className="w-5 h-[2.5px] bg-[var(--accent-gold)] rounded-full"></span>
+          <span className="w-4 h-[2px] bg-[var(--accent-gold)] rounded-full"></span>
+          <span className="w-4 h-[2px] bg-[var(--accent-gold)] rounded-full"></span>
+          <span className="w-4 h-[2px] bg-[var(--accent-gold)] rounded-full"></span>
         </button>
+
+        {/* Mobile Header Logo */}
+        <Link href="/" className="text-xl font-black tracking-widest flex items-center gap-2">
+          <FontAwesomeIcon icon={faGem} className="text-[var(--accent-gold)] w-5 h-5 shrink-0" />
+          <span>NOIR<span className="text-[var(--accent-gold)]">&</span>GOLD</span>
+        </Link>
+
+        {/* Cart Quick Icon for Mobile Header */}
+        <Link href="/cart" className="relative p-2 rounded-xl text-[var(--text-secondary)]">
+          <FontAwesomeIcon icon={faCartShopping} className="w-4 h-4 text-[var(--accent-gold)]" />
+          {cartCount > 0 && (
+            <span className="absolute top-0 right-0 w-4 h-4 rounded-full bg-[var(--brand-red)] text-[var(--text-on-dark)] font-black text-[9px] flex items-center justify-center">
+              {cartCount}
+            </span>
+          )}
+        </Link>
       </div>
 
       {/* DESKTOP HEADER */}

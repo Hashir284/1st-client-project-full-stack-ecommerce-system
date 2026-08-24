@@ -111,7 +111,7 @@ export default function Home() {
         <HeroSection />
 
         <CategorySliderSection />
-        <FilteredShowcaseCarousel/>
+        {/* <FilteredShowcaseCarousel/> */}
 
         {/* BRAND VALUE PROPOSITIONS */}
         {/* <section className="py-12" style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--bg-primary)' }}>
