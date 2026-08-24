@@ -9,11 +9,11 @@ import {
   faHeart,
   faStar,
   faCartShopping,
-} from '../../icons'; // Adjust path if needed
+} from '../../icons'; // Adjust path if neededd
 
 const FILTERS = [
-  { key: 'women', label: 'Women' },
   { key: 'men', label: 'Men' },
+  { key: 'women', label: 'Women' },
   { key: 'couple', label: 'Couple' },
   { key: 'new', label: 'New Arrival' },
 ];
