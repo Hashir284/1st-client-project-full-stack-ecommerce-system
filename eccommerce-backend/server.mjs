@@ -14,6 +14,15 @@ import dashboardRoutes from "./src/routes/dashboardRoutes.js";
 
 const app = express();
 
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 // --- Core middleware ---
 // const allowedOrigins = (process?.env?.CLIENT_URL || "http://localhost:5173")
 //   .split(",")
@@ -54,16 +63,11 @@ app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process?.env?.PORT || 4000;
-
-const startServer = async () => {
-  await connectDB();
-  if (process?.env?.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 4000;
   app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`);
-  })
+    console.log(`Server running in development mode on port ${PORT}`);
+  });
 }
-};
-
-startServer();
 
 export default app;
