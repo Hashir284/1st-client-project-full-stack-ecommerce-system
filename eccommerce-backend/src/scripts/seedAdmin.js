@@ -1,7 +1,5 @@
 // Creates the first admin account from environment variables.
 // Safe to run multiple times - it only creates an admin if none exists.
-import dns from "node:dns";
-dns.setServers(['1.1.1.1', '8.8.4.4']);
 import "dotenv/config";
 import connectDB from "../config/db.js";
 import User from "../models/User.js";
