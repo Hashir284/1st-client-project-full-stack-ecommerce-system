@@ -9,8 +9,7 @@ const connectDB = async () => {
   const uri = process?.env?.MONGO_URI;
   console.log("URI Received:", JSON.stringify(uri));
   if (!uri) {
-    console.error("MONGO_URI is not set in the environment. Check your .env file.");
-    process.exit(1);
+    throw new Error("MONGO_URI is missing in environment variables");
   }
 
   try {
