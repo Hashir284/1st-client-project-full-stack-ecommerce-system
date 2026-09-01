@@ -5,7 +5,7 @@
   "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "build": "ncc build index.js -o dist",
+    "build": "ncc build src/server.js -o dist",
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "seed:admin": "node src/scripts/seedAdmin.js",
