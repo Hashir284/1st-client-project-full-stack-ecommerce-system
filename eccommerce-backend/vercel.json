@@ -1,21 +1,13 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "src/server.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": [
-          "node_modules/express/**",
-          "node_modules/debug/**"
-        ]
-      }
+  "functions": {
+    "src/server.js": {
+      "includeFiles": "node_modules/**"
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "src/server.js"
+      "source": "/(.*)",
+      "destination": "/src/server.js"
     }
   ]
 }
