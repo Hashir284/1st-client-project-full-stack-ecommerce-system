@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "E-commerce admin dashboard backend API",
   "type": "module",
-  "main": "server.js",
+  "main": "server.mjs",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "seed:admin": "node scripts/seedAdmin.js",
-    "seed:demo": "node scripts/seedDemo.js"
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "seed:admin": "node scripts/seedAdmin.mjs",
+    "seed:demo": "node scripts/seedDemo.mjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
