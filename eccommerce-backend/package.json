@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "E-commerce admin dashboard backend API",
   "type": "module",
-  "main": "src/server.js",
+  "main": "src/server.mjs",
   "scripts": {
-    "build": "ncc build src/server.js -o dist",
-    "start": "node src/server.js",
-    "dev": "node --watch src/server.js",
+    "build": "ncc build src/server.mjs -o dist",
+    "start": "node src/server.mjs",
+    "dev": "node --watch src/server.mjs",
     "seed:admin": "node src/scripts/seedAdmin.js",
     "seed:demo": "node src/scripts/seedDemo.js"
   },
