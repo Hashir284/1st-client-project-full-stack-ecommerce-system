@@ -7,7 +7,7 @@ import mongoose from "mongoose";
  */
 const connectDB = async () => {
   const uri = process.env.MONGO_URI;
-
+  console.log("URI Received:", JSON.stringify(uri));
   if (!uri) {
     console.error("MONGO_URI is not set in the environment. Check your .env file.");
     process.exit(1);
