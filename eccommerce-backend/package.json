@@ -5,6 +5,7 @@
   "type": "module",
   "main": "src/server.js",
   "scripts": {
+    "build": "ncc build index.js -o dist",
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "seed:admin": "node src/scripts/seedAdmin.js",
@@ -18,5 +19,8 @@
     "express": "^4.22.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.24.4"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.45.0"
   }
 }
