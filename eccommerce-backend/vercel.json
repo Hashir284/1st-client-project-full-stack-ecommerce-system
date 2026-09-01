@@ -1,6 +1,8 @@
 {
   "functions": {
-    "src/server.js": {}
+    "src/server.js": {
+      "maxDuration": 30
+    }
   },
   "rewrites": [
     { "source": "/(.*)", "destination": "/src/server.js" }
