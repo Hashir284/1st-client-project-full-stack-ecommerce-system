@@ -37,6 +37,7 @@ app.use(
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/',(req, res)=>res.send({status:'successful'}));
 // --- Health check ---
 app.get("/api/health", (req, res) => {
   res.status(200).json({ success: true, message: "API is running" });
