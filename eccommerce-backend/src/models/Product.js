@@ -19,16 +19,29 @@ const productSchema = new mongoose.Schema(
       min: [0, "Price cannot be negative"],
     },
     discountPrice: {
-      type: Number,
-      min: [0, "Discount price cannot be negative"],
-      default: 0,
-      validate: {
-        validator: function validateDiscount(value) {
-          return !value || value <= this.price;
-        },
-        message: "Discount price cannot be greater than price",
-      },
+  type: Number,
+  min: [0, "Discount price cannot be negative"],
+  default: 0,
+  validate: {
+    validator: function validateDiscount(value) {
+      // 1. Agar value null, undefined ya 0 hai toh valid hai
+      if (value === null || value === undefined || value === 0) {
+        return true;
+      }
+
+      // 2. Mongoose Document vs Query Context Handling
+      const price = this instanceof Object && 'price' in this 
+        ? this.price 
+        : this?.getUpdate?.()?.price || this?.getUpdate?.()?.$set?.price;
+
+      // 3. Agar price available nahi (e.g. update query context missing), fail safe exit
+      if (price === undefined) return true;
+
+      return value <= price;
     },
+    message: "Discount price ({VALUE}) cannot be greater than regular price",
+  },
+},
     category: {
       type: String,
       required: [true, "Category is required"],
