@@ -2,7 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const api = axios.create({
-  baseURL: import.meta.env.myapi || "http://localhost:4000/api",
+  baseURL: import.meta.env.myapi,
   headers: { "Content-Type": "application/json" },
 });
 
