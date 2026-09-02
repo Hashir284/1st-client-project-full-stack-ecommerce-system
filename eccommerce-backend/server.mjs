@@ -50,6 +50,7 @@ app.get("/api/health", (req, res) => {
 app.get("/", (req, res) => {
   res.status(200).json({ success: true, message: "Welcome to the API" });
 });
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 // --- Routes ---
 app.use("/api/auth", authRoutes);
