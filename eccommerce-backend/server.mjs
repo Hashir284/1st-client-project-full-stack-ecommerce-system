@@ -1,5 +1,5 @@
 import dns from "node:dns";
-dns.setServers(['1.1.1.1', '8.8.4.4']);
+dns.setServers(['0.0.0.0', '8.8.8.8']);
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -19,15 +19,6 @@ app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 app.use(cors());
 
-app.use(async (req, res, next) => {
-  try {
-    console.log("Connecting to MongoDB...");
-    await connectDB();
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
 
 // --- Core middleware ---
 // const allowedOrigins = (process?.env?.CLIENT_URL || "http://localhost:5173")
@@ -44,9 +35,18 @@ app.use(async (req, res, next) => {
   //   },
   //   credentials: true,
   // }
-
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true }));
+  
+  app.use(express.json({ limit: "10mb" }));
+  app.use(express.urlencoded({ extended: true }));
+  app.use(async (req, res, next) => {
+    try {
+      console.log("Connecting to MongoDB...");
+      await connectDB();
+      next();
+    } catch (error) {
+      next(error);
+    }
+  });
 
 // --- Health check ---
 app.get("/api/health", (req, res) => {
