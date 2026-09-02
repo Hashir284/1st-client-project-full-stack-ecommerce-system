@@ -6,19 +6,28 @@ import mongoose from "mongoose";
  * the API is useless without a database.
  */
 const connectDB = async () => {
+  // Connection caching for Serverless performance
+  if (mongoose.connection.readyState >= 1) {
+    return;
+  }
+
   const uri = process?.env?.MONGO_URI;
   console.log("URI Received:", JSON.stringify(uri));
+
   if (!uri) {
     throw new Error("MONGO_URI is missing in environment variables");
   }
 
   try {
     mongoose.set("strictQuery", true);
-    const conn = await mongoose.connect(uri);
+    const conn = await mongoose.connect(uri, {
+      bufferCommands: false,
+    });
     console.log(`MongoDB connected: ${conn.connection.host}/${conn.connection.name}`);
   } catch (error) {
     console.error(`MongoDB connection error: ${error.message}`);
-    process.exit(1);
+    // Serverless crash fix: process.exit(1) ki jaga error throw karein
+    throw error;
   }
 
   mongoose.connection.on("disconnected", () => {

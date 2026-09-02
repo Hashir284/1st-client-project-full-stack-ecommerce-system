@@ -14,22 +14,26 @@ import dashboardRoutes from "./src/routes/dashboardRoutes.js";
 
 const app = express();
 
+// --- Favicon handling ---
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
+app.use(cors());
+
 app.use(async (req, res, next) => {
   try {
+    console.log("Connecting to MongoDB...");
     await connectDB();
     next();
   } catch (error) {
     next(error);
   }
 });
-app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 // --- Core middleware ---
 // const allowedOrigins = (process?.env?.CLIENT_URL || "http://localhost:5173")
 //   .split(",")
 //   .map((origin) => origin.trim());
 
-app.use(cors());
   //   {
   //   origin: (origin, callback) => {
   //     if (!origin || allowedOrigins.includes(origin)) {
@@ -63,7 +67,6 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process?.env?.PORT || 4000;
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 4000;
   app.listen(PORT, () => {
