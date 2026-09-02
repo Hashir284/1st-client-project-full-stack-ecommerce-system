@@ -2,8 +2,13 @@
 // a consistent { success, message } shape.
 
 export const notFound = (req, res, next) => {
+  if (req.originalUrl === '/favicon.ico') {
+    return res.status(204).end();
+  }
+  
+  const error = new Error(`Route not found - ${req.originalUrl}`);
   res.status(404);
-  next(new Error(`Route not found - ${req.originalUrl}`));
+  next(error);
 };
 
 // eslint-disable-next-line no-unused-vars
