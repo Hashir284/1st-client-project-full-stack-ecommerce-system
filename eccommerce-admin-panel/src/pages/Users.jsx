@@ -52,6 +52,12 @@ export default function Users() {
   }, [search, role, status]);
 
   const toggleActive = async (u) => {
+    // Admin user protection on frontend click
+    if (u.role === "admin" || u.email === currentUser?.email) {
+      toast.error("Admin accounts cannot be deactivated");
+      return;
+    }
+
     setTogglingId(u._id);
     try {
       const { data } = await api.put(`/users/${u._id}`, { isActive: !u.isActive });
@@ -136,52 +142,61 @@ export default function Users() {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((u) => (
-                    <tr key={u._id} className="border-b last:border-0 hover:bg-panel-hover" style={{ borderColor: "var(--color-surface-border)" }}>
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-3">
-                          <div
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white"
-                            style={{ backgroundColor: "var(--color-brand-primary)" }}
-                          >
-                            {u.avatar ? <img src={u.avatar} alt="" className="h-full w-full rounded-full object-cover" /> : initials(u.name)}
+                  {users.map((u) => {
+                    const isAdmin = u.role === "admin" || u.email === currentUser?.email;
+
+                    return (
+                      <tr key={u._id} className="border-b last:border-0 hover:bg-panel-hover" style={{ borderColor: "var(--color-surface-border)" }}>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-3">
+                            <div
+                              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white"
+                              style={{ backgroundColor: "var(--color-brand-primary)" }}
+                            >
+                              {u.avatar ? <img src={u.avatar} alt="" className="h-full w-full rounded-full object-cover" /> : initials(u.name)}
+                            </div>
+                            <div className="min-w-0">
+                              <p className="truncate font-medium text-heading">{u.name}</p>
+                              <p className="truncate text-xs text-muted">{u.email}</p>
+                            </div>
                           </div>
-                          <div className="min-w-0">
-                            <p className="truncate font-medium text-heading">{u.name}</p>
-                            <p className="truncate text-xs text-muted">{u.email}</p>
+                        </td>
+                        <td className="px-4 py-3"><Badge status={u.role} /></td>
+                        <td className="px-4 py-3">
+                          {/* Admin check condition */}
+                          {isAdmin ? (
+                            <Badge status={u.isActive ? "active" : "inactive"} />
+                          ) : (
+                            <button
+                              onClick={() => toggleActive(u)}
+                              disabled={togglingId === u._id}
+                              className="focus-ring rounded cursor-pointer"
+                            >
+                              <Badge status={u.isActive ? "active" : "inactive"} />
+                            </button>
+                          )}
+                        </td>
+                        <td className="px-4 py-3 text-xs text-muted">{new Date(u.createdAt).toLocaleDateString()}</td>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center justify-end gap-1">
+                            <button onClick={() => setViewUser(u)} className="rounded-md p-1.5 text-muted hover:bg-panel-hover focus-ring" aria-label="View user">
+                              <Eye size={15} />
+                            </button>
+                            <button
+                              onClick={() => setDeleteTarget(u)}
+                              disabled={u._id === currentUser?.id || isAdmin}
+                              className="rounded-md p-1.5 hover:bg-panel-hover focus-ring disabled:opacity-30"
+                              style={{ color: "var(--color-accent-danger)" }}
+                              aria-label="Delete user"
+                              title={isAdmin ? "Admin account cannot be deleted" : "Delete user"}
+                            >
+                              <Trash2 size={15} />
+                            </button>
                           </div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-3"><Badge status={u.role} /></td>
-                      <td className="px-4 py-3">
-                        <button
-                          onClick={() => toggleActive(u)}
-                          disabled={togglingId === u._id}
-                          className="focus-ring rounded"
-                        >
-                          <Badge status={u.isActive ? "active" : "inactive"} />
-                        </button>
-                      </td>
-                      <td className="px-4 py-3 text-xs text-muted">{new Date(u.createdAt).toLocaleDateString()}</td>
-                      <td className="px-4 py-3">
-                        <div className="flex items-center justify-end gap-1">
-                          <button onClick={() => setViewUser(u)} className="rounded-md p-1.5 text-muted hover:bg-panel-hover focus-ring" aria-label="View user">
-                            <Eye size={15} />
-                          </button>
-                          <button
-                            onClick={() => setDeleteTarget(u)}
-                            disabled={u._id === currentUser?.id}
-                            className="rounded-md p-1.5 hover:bg-panel-hover focus-ring disabled:opacity-30"
-                            style={{ color: "var(--color-accent-danger)" }}
-                            aria-label="Delete user"
-                            title={u._id === currentUser?.id ? "You cannot delete your own account" : "Delete user"}
-                          >
-                            <Trash2 size={15} />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

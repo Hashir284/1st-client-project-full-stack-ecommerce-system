@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node server.mjs",
     "dev": "node --watch server.mjs",
-    "seed:admin": "node scripts/seedAdmin.js",
-    "seed:demo": "node scripts/seedDemo.js"
+    "seed:admin": "node src/scripts/seedAdmin.js",
+    "seed:demo": "node src/scripts/seedDemo.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
