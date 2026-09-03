@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import toast from "react-hot-toast";
-import { Plus, Search, Pencil, Trash2, Eye, Package, X } from "lucide-react";
+import { Plus, Search, Pencil, Trash2, Eye, Package, Upload } from "lucide-react";
+import axios from "axios";
 import api from "../api/axios";
 import Badge from "../components/Badge";
 import Modal from "../components/Modal";
@@ -24,6 +25,10 @@ const emptyForm = {
   isActive: true,
 };
 
+// Cloudinary Settings
+const CLOUD_NAME = "dl4g6bgml";
+const UPLOAD_PRESET = "1stclienteccom";
+
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, limit: 10, total: 0, totalPages: 1 });
@@ -39,6 +44,8 @@ export default function Products() {
   const [formOpen, setFormOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [form, setForm] = useState(emptyForm);
+  const [selectedFile, setSelectedFile] = useState(null); // Local image file state
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [saving, setSaving] = useState(false);
 
@@ -84,6 +91,7 @@ export default function Products() {
   const openCreateForm = () => {
     setEditingProduct(null);
     setForm(emptyForm);
+    setSelectedFile(null);
     setFormErrors({});
     setFormOpen(true);
   };
@@ -102,6 +110,7 @@ export default function Products() {
       images: (product.images || []).join(", "),
       isActive: product.isActive,
     });
+    setSelectedFile(null);
     setFormErrors({});
     setFormOpen(true);
   };
@@ -117,8 +126,28 @@ export default function Products() {
     if (!form.category.trim()) errs.category = "Category is required";
     if (!form.sku.trim()) errs.sku = "SKU is required";
     if (form.stock === "" || Number(form.stock) < 0) errs.stock = "Enter a valid stock quantity";
+
+    // Dynamic Validation: Image URL text OR Upload File required
+    if (!form.images.trim() && !selectedFile) {
+      errs.images = "Either Image URL or File Upload is required";
+    }
+
     setFormErrors(errs);
     return Object.keys(errs).length === 0;
+  };
+
+  // Direct Cloudinary Upload using Axios POST
+  const uploadImageToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    const response = await axios.post(
+      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+      formData
+    );
+
+    return response.data.secure_url;
   };
 
   const handleSubmit = async (e) => {
@@ -126,22 +155,32 @@ export default function Products() {
     if (!validate()) return;
 
     setSaving(true);
-    const payload = {
-      name: form.name.trim(),
-      description: form.description.trim(),
-      price: Number(form.price),
-      discountPrice: form.discountPrice ? Number(form.discountPrice) : 0,
-      category: form.category.trim(),
-      brand: form.brand.trim(),
-      sku: form.sku.trim(),
-      stock: Number(form.stock),
-      images: form.images
-        ? form.images.split(",").map((s) => s.trim()).filter(Boolean)
-        : [],
-      isActive: form.isActive,
-    };
+    let finalImageUrls = form.images
+      ? form.images.split(",").map((s) => s.trim()).filter(Boolean)
+      : [];
 
     try {
+      // Direct upload if file selected
+      if (selectedFile) {
+        setUploadingImage(true);
+        const uploadedUrl = await uploadImageToCloudinary(selectedFile);
+        finalImageUrls.unshift(uploadedUrl);
+        setUploadingImage(false);
+      }
+
+      const payload = {
+        name: form.name.trim(),
+        description: form.description.trim(),
+        price: Number(form.price),
+        discountPrice: form.discountPrice ? Number(form.discountPrice) : 0,
+        category: form.category.trim(),
+        brand: form.brand.trim(),
+        sku: form.sku.trim(),
+        stock: Number(form.stock),
+        images: finalImageUrls,
+        isActive: form.isActive,
+      };
+
       if (editingProduct) {
         await api.put(`/products/${editingProduct._id}`, payload);
         toast.success("Product updated successfully");
@@ -152,9 +191,10 @@ export default function Products() {
       setFormOpen(false);
       fetchProducts();
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to save product");
+      toast.error(err.response?.data?.message || err.message || "Failed to save product");
     } finally {
       setSaving(false);
+      setUploadingImage(false);
     }
   };
 
@@ -370,9 +410,35 @@ export default function Products() {
               {formErrors.stock && <p className="mt-1 text-xs" style={{ color: "var(--color-accent-danger)" }}>{formErrors.stock}</p>}
             </div>
 
-            <div className="sm:col-span-2">
-              <label className="mb-1.5 block text-sm font-medium text-body">Image URLs (comma separated)</label>
-              <input className="input-field" value={form.images} onChange={(e) => setForm({ ...form, images: e.target.value })} disabled={saving} placeholder="https://…, https://…" />
+            {/* Combined Option: Image URL OR File Upload */}
+            <div className="sm:col-span-2 space-y-3">
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-body">Option 1: Image URLs (comma separated)</label>
+                <input className="input-field" value={form.images} onChange={(e) => setForm({ ...form, images: e.target.value })} disabled={saving} placeholder="https://…, https://…" />
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-body">Option 2: Direct Image Upload (Cloudinary)</label>
+                <div className="flex items-center gap-2">
+                  <label className="flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium hover:bg-panel-hover" style={{ borderColor: "var(--color-surface-border)" }}>
+                    <Upload size={16} />
+                    <span>{selectedFile ? selectedFile.name : "Choose File..."}</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      disabled={saving}
+                      onChange={(e) => setSelectedFile(e.target.files[0] || null)}
+                    />
+                  </label>
+                  {selectedFile && (
+                    <button type="button" onClick={() => setSelectedFile(null)} className="text-xs text-red-500 hover:underline">
+                      Clear File
+                    </button>
+                  )}
+                </div>
+              </div>
+              {formErrors.images && <p className="text-xs" style={{ color: "var(--color-accent-danger)" }}>{formErrors.images}</p>}
             </div>
 
             <div className="flex items-center gap-2 sm:col-span-2">
@@ -395,7 +461,7 @@ export default function Products() {
               Cancel
             </button>
             <button type="submit" className="btn-primary" disabled={saving}>
-              {saving ? "Saving…" : editingProduct ? "Update Product" : "Create Product"}
+              {saving ? (uploadingImage ? "Uploading Image…" : "Saving…") : editingProduct ? "Update Product" : "Create Product"}
             </button>
           </div>
         </form>
