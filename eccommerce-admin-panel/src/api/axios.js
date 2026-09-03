@@ -2,9 +2,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const api = axios.create({
-  baseURL: import.meta.env.myapi  || "http://localhost:4000/api",
+  baseURL: import.meta.env.VITE_MY_API,
   headers: { "Content-Type": "application/json" },
-});
+}); 
 
 // Attach the JWT token to every outgoing request, if present.
 api.interceptors.request.use((config) => {
