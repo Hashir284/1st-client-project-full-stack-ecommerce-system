@@ -176,12 +176,13 @@ export default function Products() {
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="relative w-full flex sm:max-w-xs">
+        <div className="relative w-full sm:max-w-xs">
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search products, SKU, brand…"
-            className="input-field pl-9 inline-block outline-none"
+            className="input-field pl-9"
           />
         </div>
 

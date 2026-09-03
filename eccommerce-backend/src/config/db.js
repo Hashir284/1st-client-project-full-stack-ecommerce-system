@@ -6,10 +6,11 @@ import mongoose from "mongoose";
  * the API is useless without a database.
  */
 const connectDB = async () => {
-  const uri = process?.env?.MONGO_URI;
-  console.log("URI Received:", JSON.stringify(uri));
+  const uri = process.env.MONGO_URI;
+
   if (!uri) {
-    throw new Error("MONGO_URI is missing in environment variables");
+    console.error("MONGO_URI is not set in the environment. Check your .env file.");
+    process.exit(1);
   }
 
   try {
