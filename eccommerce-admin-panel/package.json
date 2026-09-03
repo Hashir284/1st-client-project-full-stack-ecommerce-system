@@ -7,9 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "postinstall": "npm approve-scripts"
-  },
+    "preview": "vite preview"
+    },
   "dependencies": {
     "axios": "^1.7.2",
     "lucide-react": "^0.400.0",
