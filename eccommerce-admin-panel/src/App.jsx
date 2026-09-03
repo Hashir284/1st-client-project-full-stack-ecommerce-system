@@ -27,9 +27,10 @@ export default function App() {
           }}
         />
         <Routes>
+          {/* Public Route */}
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Login />} />
 
+          {/* Protected Routes Container */}
           <Route
             element={
               <ProtectedRoute>
@@ -42,10 +43,12 @@ export default function App() {
             <Route path="/orders" element={<Orders />} />
             <Route path="/users" element={<Users />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="*" element={<Dashboard />} />
           </Route>
 
+          {/* Redirect Root Route to Dashboard */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+          {/* Fallback for Unknown URLs */}
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </AuthProvider>

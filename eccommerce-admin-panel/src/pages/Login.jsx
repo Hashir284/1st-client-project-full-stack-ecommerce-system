@@ -33,6 +33,7 @@ export default function Login() {
       await login(email, password);
       navigate("/dashboard", { replace: true });
     } catch (err) {
+      console.error(err);
       setError(err.response?.data?.message || "Unable to log in. Please try again.");
     } finally {
       setSubmitting(false);
