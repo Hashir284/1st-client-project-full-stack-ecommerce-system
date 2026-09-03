@@ -3,7 +3,7 @@
 
 export const notFound = (req, res, next) => {
   res.status(404);
-  next(new Error(`Route not found - ${req.originalUrl}`));
+  if(req.originalUrl !== '/favicon.ico')next(new Error(`Route not found - ${req.originalUrl}`));
 };
 
 // eslint-disable-next-line no-unused-vars
