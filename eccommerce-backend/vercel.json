@@ -1,4 +1,15 @@
 {
-  "builds": [{ "src": "eccommerce-backend/server.mjs", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "eccommerce-backend/server.mjs" }]
+    "version": 2,
+    "builds": [
+        {
+            "src": "server.mjs",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/server.mjs"
+        }
+    ]
 }

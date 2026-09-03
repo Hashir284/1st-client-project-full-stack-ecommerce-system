@@ -57,13 +57,12 @@ const PORT = process.env.PORT || 4000;
 
 const startServer = async () => {
   await connectDB();
-  if (process?.env?.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`);
-  })
-}
 };
-
 startServer();
+if (process?.env?.NODE_ENV !== 'production') {
+app.listen(PORT, () => {
+  console.log(`Server running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`);
+})
+}
 
 export default app
