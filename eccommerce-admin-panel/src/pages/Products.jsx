@@ -10,7 +10,11 @@ import Pagination from "../components/Pagination";
 import EmptyState from "../components/EmptyState";
 import { TableSkeleton } from "../components/Skeleton";
 
-const currency = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n || 0);
+// Hardcoded PKR Formatter Function
+const formatCurrency = (amount) => {
+  const formattedNumber = Number(amount || 0).toLocaleString("en-PK");
+  return `Rs. ${formattedNumber}`;
+};
 
 const emptyForm = {
   name: "",
@@ -44,7 +48,7 @@ export default function Products() {
   const [formOpen, setFormOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [form, setForm] = useState(emptyForm);
-  const [selectedFile, setSelectedFile] = useState(null); // Local image file state
+  const [selectedFile, setSelectedFile] = useState(null);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [saving, setSaving] = useState(false);
@@ -127,7 +131,6 @@ export default function Products() {
     if (!form.sku.trim()) errs.sku = "SKU is required";
     if (form.stock === "" || Number(form.stock) < 0) errs.stock = "Enter a valid stock quantity";
 
-    // Dynamic Validation: Image URL text OR Upload File required
     if (!form.images.trim() && !selectedFile) {
       errs.images = "Either Image URL or File Upload is required";
     }
@@ -136,7 +139,6 @@ export default function Products() {
     return Object.keys(errs).length === 0;
   };
 
-  // Direct Cloudinary Upload using Axios POST
   const uploadImageToCloudinary = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -160,7 +162,6 @@ export default function Products() {
       : [];
 
     try {
-      // Direct upload if file selected
       if (selectedFile) {
         setUploadingImage(true);
         const uploadedUrl = await uploadImageToCloudinary(selectedFile);
@@ -217,7 +218,6 @@ export default function Products() {
     <div className="space-y-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full sm:max-w-xs">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -304,10 +304,12 @@ export default function Products() {
                       <td className="px-4 py-3 text-body">{product.category}</td>
                       <td className="px-4 py-3">
                         <span className="font-medium text-heading">
-                          {currency(product.discountPrice || product.price)}
+                          {formatCurrency(product.discountPrice || product.price)}
                         </span>
                         {!!product.discountPrice && (
-                          <span className="ml-1.5 text-xs text-muted line-through">{currency(product.price)}</span>
+                          <span className="ml-1.5 text-xs text-muted line-through">
+                            {formatCurrency(product.price)}
+                          </span>
                         )}
                       </td>
                       <td className="px-4 py-3 text-body">
@@ -410,7 +412,6 @@ export default function Products() {
               {formErrors.stock && <p className="mt-1 text-xs" style={{ color: "var(--color-accent-danger)" }}>{formErrors.stock}</p>}
             </div>
 
-            {/* Combined Option: Image URL OR File Upload */}
             <div className="sm:col-span-2 space-y-3">
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-body">Option 1: Image URLs (comma separated)</label>
@@ -488,11 +489,11 @@ export default function Products() {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <p className="text-xs text-muted">Price</p>
-                <p className="text-body">{currency(viewProduct.price)}</p>
+                <p className="text-body">{formatCurrency(viewProduct.price)}</p>
               </div>
               <div>
                 <p className="text-xs text-muted">Discount Price</p>
-                <p className="text-body">{viewProduct.discountPrice ? currency(viewProduct.discountPrice) : "—"}</p>
+                <p className="text-body">{viewProduct.discountPrice ? formatCurrency(viewProduct.discountPrice) : "—"}</p>
               </div>
               <div>
                 <p className="text-xs text-muted">Category</p>

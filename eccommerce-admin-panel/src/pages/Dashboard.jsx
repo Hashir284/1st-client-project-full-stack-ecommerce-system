@@ -4,6 +4,7 @@ import {
   ShoppingCart,
   Package,
   Users as UsersIcon,
+  Banknote,
 } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -22,8 +23,11 @@ import Badge from "../components/Badge";
 import { CardSkeleton, Skeleton } from "../components/Skeleton";
 import EmptyState from "../components/EmptyState";
 
-const currency = (n) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n || 0);
+// Hardcoded PKR Currency Formatter Function
+const currency = (n) => {
+  const formattedNumber = Number(n || 0).toLocaleString("en-PK");
+  return `Rs. ${formattedNumber}`;
+};
 
 export default function Dashboard() {
   const [stats, setStats] = useState(null);
@@ -75,7 +79,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Total Revenue" value={currency(stats.totalRevenue)} icon={DollarSign} accent="var(--color-accent-success)" />
+        <StatCard label="Total Revenue" value={currency(stats.totalRevenue)} icon={Banknote} accent="var(--color-accent-success)" />
         <StatCard label="Total Orders" value={stats.totalOrders} icon={ShoppingCart} accent="var(--color-brand-primary)" />
         <StatCard label="Total Products" value={stats.totalProducts} icon={Package} accent="var(--color-accent-info)" />
         <StatCard label="Total Users" value={stats.totalUsers} icon={UsersIcon} accent="var(--color-accent-warning)" />

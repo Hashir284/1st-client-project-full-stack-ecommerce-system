@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Eye, EyeOff, User as UserIcon, Lock, Store } from "lucide-react";
 import api from "../api/axios";
@@ -195,30 +195,48 @@ function SecurityTab() {
 }
 
 function StoreTab() {
-  // Store-level settings aren't backed by a dedicated API endpoint in this
-  // build - wire this form up to your own settings collection/endpoint
-  // when you're ready to persist it.
   const [store, setStore] = useState({
     name: "My Store",
     email: "support@example.com",
     phone: "",
-    currency: "USD",
     freeShippingThreshold: "",
   });
+  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const { data } = await api.get("/store/settings");
+        if (data?.data) {
+          setStore(data.data);
+        }
+      } catch (err) {
+        toast.error("Failed to load store settings");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSettings();
+  }, []);
+
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setSaving(true);
-  try {
-    await api.put("/store/settings", store);
-    toast.success("Store settings updated successfully");
-  } catch (err) {
-    toast.error(err.response?.data?.message || "Failed to save store settings");
-  } finally {
-    setSaving(false);
+    e.preventDefault();
+    setSaving(true);
+    try {
+      await api.put("/store/settings", store);
+      toast.success("Store settings updated successfully");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to save store settings");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return <div className="p-6 text-center text-sm text-muted">Loading settings…</div>;
   }
-};
 
   return (
     <form onSubmit={handleSubmit} className="card space-y-4 p-6">
@@ -236,15 +254,6 @@ function StoreTab() {
           <input className="input-field" value={store.phone} onChange={(e) => setStore({ ...store, phone: e.target.value })} disabled={saving} />
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-body">Currency</label>
-          <select className="input-field" value={store.currency} onChange={(e) => setStore({ ...store, currency: e.target.value })} disabled={saving}>
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="PKR">PKR</option>
-          </select>
-        </div>
-        <div className="sm:col-span-2">
           <label className="mb-1.5 block text-sm font-medium text-body">Free shipping threshold</label>
           <input
             type="number"

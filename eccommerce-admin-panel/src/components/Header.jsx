@@ -42,7 +42,7 @@ export default function Header({ title, onMenuClick }) {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4">
-        <button
+        {/* <button
           className="relative rounded-full p-2 text-muted hover:bg-panel-hover focus-ring"
           aria-label="Notifications"
         >
@@ -51,7 +51,7 @@ export default function Header({ title, onMenuClick }) {
             className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full"
             style={{ backgroundColor: "var(--color-accent-danger)" }}
           />
-        </button>
+        </button> */}
 
         <div className="relative" ref={menuRef}>
           <button
