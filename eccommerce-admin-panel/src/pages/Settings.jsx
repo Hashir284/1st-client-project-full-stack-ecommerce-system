@@ -207,14 +207,18 @@ function StoreTab() {
   });
   const [saving, setSaving] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSaving(true);
-    setTimeout(() => {
-      setSaving(false);
-      toast.success("Store settings saved locally (connect a backend endpoint to persist these)");
-    }, 500);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSaving(true);
+  try {
+    await api.put("/store/settings", store);
+    toast.success("Store settings updated successfully");
+  } catch (err) {
+    toast.error(err.response?.data?.message || "Failed to save store settings");
+  } finally {
+    setSaving(false);
+  }
+};
 
   return (
     <form onSubmit={handleSubmit} className="card space-y-4 p-6">

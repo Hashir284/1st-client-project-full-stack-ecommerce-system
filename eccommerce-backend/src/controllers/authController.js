@@ -3,6 +3,43 @@ import generateToken from "../utils/generateToken.js";
 import { success, failure } from "../utils/apiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
+// @desc    Register a new customer
+// @route   POST /api/auth/register
+// @access  Public
+export const register = asyncHandler(async (req, res) => {
+  const { name, email, password, phone } = req.body;
+
+  if (!name || !email || !password) {
+    return failure(res, 400, "Name, email, and password are required");
+  }
+
+  const existingUser = await User.findOne({ email: email.toLowerCase() });
+  if (existingUser) {
+    return failure(res, 400, "Account already exists with this email");
+  }
+
+  const user = await User.create({
+    name,
+    email: email.toLowerCase(),
+    password,
+    phone: phone || "",
+    role: "user", // Default role
+  });
+
+  const token = generateToken(user._id);
+
+  return success(res, 201, "Account registered successfully", {
+    token,
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      avatar: user.avatar,
+    },
+  });
+});
+
 // @desc    Login admin/user
 // @route   POST /api/auth/login
 // @access  Public
@@ -26,10 +63,6 @@ export const login = asyncHandler(async (req, res) => {
   const isMatch = await user.comparePassword(password);
   if (!isMatch) {
     return failure(res, 401, "Invalid email or password");
-  }
-
-  if (user.role !== "admin") {
-    return failure(res, 403, "Only admin accounts can access this dashboard");
   }
 
   const token = generateToken(user._id);

@@ -5,6 +5,50 @@ import asyncHandler from "../utils/asyncHandler.js";
 
 const VALID_ORDER_STATUSES = ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"];
 
+// @desc    Create new order (Checkout)
+// @route   POST /api/orders
+// @access  Private (Logged-in User/Admin)
+export const createOrder = asyncHandler(async (req, res) => {
+  const {
+    items,
+    shippingAddress,
+    paymentMethod,
+    subtotal,
+    discount,
+    shipping,
+    total,
+  } = req.body;
+
+  if (!items || items.length === 0) {
+    return failure(res, 400, "No order items provided");
+  }
+
+  if (!shippingAddress) {
+    return failure(res, 400, "Shipping address is required");
+  }
+
+  const order = await Order.create({
+    user: req.user._id,
+    items,
+    shippingAddress,
+    paymentMethod,
+    subtotal,
+    discount,
+    shipping,
+    total,
+  });
+
+  return success(res, 201, "Order placed successfully", order);
+});
+
+// @desc    Get logged-in user's order history
+// @route   GET /api/orders/my-orders
+// @access  Private (Logged-in User/Admin)
+export const getMyOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 });
+  return success(res, 200, "User orders fetched successfully", orders);
+});
+
 // @desc    List orders (paginated, searchable, filterable)
 // @route   GET /api/orders
 // @access  Private (admin)
@@ -20,7 +64,6 @@ export const getOrders = asyncHandler(async (req, res) => {
   let query = Order.find(filter).populate("user", "name email");
 
   if (search) {
-    // Search by order id (if it looks like a valid ObjectId) or customer name/email
     const orConditions = [];
     if (search.match(/^[0-9a-fA-F]{24}$/)) {
       orConditions.push({ _id: search });
@@ -40,7 +83,6 @@ export const getOrders = asyncHandler(async (req, res) => {
       filter.$or = orConditions;
       query = Order.find(filter).populate("user", "name email");
     } else if (!search.match(/^[0-9a-fA-F]{24}$/)) {
-      // No matches at all
       filter._id = null;
       query = Order.find(filter).populate("user", "name email");
     }
@@ -64,12 +106,19 @@ export const getOrders = asyncHandler(async (req, res) => {
 
 // @desc    Get a single order with full details
 // @route   GET /api/orders/:id
-// @access  Private (admin)
+// @access  Private
 export const getOrder = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id)
     .populate("user", "name email phone")
     .populate("items.product", "name images");
+
   if (!order) return failure(res, 404, "Order not found");
+
+  // Allow if user is admin OR order belongs to the user
+  if (req.user.role !== "admin" && String(order.user._id) !== String(req.user._id)) {
+    return failure(res, 403, "Not authorized to view this order");
+  }
+
   return success(res, 200, "Order fetched successfully", order);
 });
 

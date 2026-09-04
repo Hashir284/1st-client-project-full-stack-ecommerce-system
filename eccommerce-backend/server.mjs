@@ -1,5 +1,6 @@
 import dns from "node:dns";
 dns.setServers(['1.1.1.1', '8.8.8.8']);
+import storeRoutes from "./src/routes/store.js";
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -48,6 +49,8 @@ app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+// Routes Mount
+app.use("/api/store", storeRoutes);
 
 // --- Error handling ---
 app.use(notFound);
